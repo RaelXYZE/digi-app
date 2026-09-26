@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pengumuman-1-2026-09-20",
+    "title": "[ISI: judul pengumuman 1]",
+    "date": "2026-09-20",
+    "category": "Pengumuman",
+    "summary": "[ISI: ringkasan pengumuman 1]",
+    "url": ""
+  },
+  {
+    "id": "pengumuman-2-2026-09-15",
+    "title": "[ISI: judul pengumuman 2]",
+    "date": "2026-09-15",
+    "category": "Pengumuman",
+    "summary": "[ISI: ringkasan pengumuman 2]",
+    "url": ""
+  },
+  {
+    "id": "pengumuman-3-2026-09-10",
+    "title": "[ISI: judul pengumuman 3]",
+    "date": "2026-09-10",
+    "category": "Pengumuman",
+    "summary": "[ISI: ringkasan pengumuman 3]",
+    "url": ""
+  }
+]

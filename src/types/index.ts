@@ -1,0 +1,32 @@
+export type Article = {
+  id: string;
+  title: string;
+  /** ISO format: YYYY-MM-DD */
+  date: string;
+  category: string;
+  summary: string;
+  url: string;
+};
+
+export type ServiceGroup = "utama" | "pengaduan" | "informasi";
+
+export type Service = {
+  id: string;
+  name: string;
+  description: string;
+  action: string;
+  url: string;
+  group: ServiceGroup;
+  longDescription?: string;
+  requirements?: string[];
+  steps?: string[];
+};
+
+export type SocialPlatform = "instagram" | "tiktok";
+
+export type GalleryItem = {
+  id: string;
+  /** ISO format: YYYY-MM-DD */
+  date: string;
+  title: string;
+};
