@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export default function proxy(request: NextRequest) {
   const nonce = crypto.randomUUID();
 
-const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === "development";
 
 const csp = [
   "default-src 'self'",

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
-import data from "@/data/pengumuman.json";
-import type { Article } from "@/types";
+import pengumumanData from "@/data/pengumuman.json";
 import { PublicationCard } from "@/components/PublicationCard";
+import { isArticle } from "@/utils/type-guards";
 
 export const metadata: Metadata = {
   title: `Pengumuman | ${SITE.shortName}`,
@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const announcements = (data as Article[]).slice().sort((a, b) => b.date.localeCompare(a.date));
+const announcements = (pengumumanData as unknown[])
+  .filter(isArticle)
+  .slice()
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 export default function PengumumanPage() {
   return (

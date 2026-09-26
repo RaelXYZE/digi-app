@@ -1,16 +1,18 @@
-import data from "@/data/berita.json";
-import type { Article as NewsType } from "@/types";
+import beritaData from "@/data/berita.json";
+import type { Article } from "@/types";
 import Link from "next/link";
 import { formatDate } from "@/utils/format-date";
 import { ExternalLink } from "@/components/external-link";
 import { Placeholder } from "@/components/Placeholder";
+import { isArticle } from "@/utils/type-guards";
 
-const articles = (data as NewsType[])
+const articles = (beritaData as unknown[])
+  .filter(isArticle)
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 6);
 
-function Meta({ article }: { article: NewsType }) {
+function Meta({ article }: { article: Article }) {
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-step--1">
       <span className="bg-mist px-2 py-0.5 font-semibold text-navy-deep">{article.category}</span>
@@ -86,12 +88,12 @@ export default function Berita() {
         )}
 
         <div className="mt-10">
-<Link
-          href="/publikasi/berita-terbaru"
-          className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
-        >
-          Semua berita
-        </Link>
+          <Link
+            href="/publikasi/berita-terbaru"
+            className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
+          >
+            Semua berita
+          </Link>
         </div>
       </div>
     </section>

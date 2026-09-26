@@ -7,7 +7,6 @@ const MONTHS = [
 export function formatDate(iso: string): string {
   const [year, month, day] = iso.split("-").map(Number);
   if (!year || !month || !day || month < 1 || month > 12) return iso;
-  // Range guard above guarantees month - 1 is a valid index into MONTHS.
-  const monthName = MONTHS[month - 1]!;
-  return `${day} ${monthName} ${year}`;
+  const monthName = MONTHS[month - 1];
+  return monthName ? `${day} ${monthName} ${year}` : iso;
 }

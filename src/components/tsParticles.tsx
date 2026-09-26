@@ -1,9 +1,9 @@
 "use client";
 import { Particles, ParticlesProvider, useParticlesProvider } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import type { Engine } from "@tsparticles/engine";
+import type { Engine, ISourceOptions } from "@tsparticles/engine";
 
-const particleOptions = {
+const particleOptions: ISourceOptions = {
   fullScreen: { enable: false },
   background: { color: "transparent" },
   particles: {
@@ -15,32 +15,22 @@ const particleOptions = {
       opacity: 0.15,
       distance: 150,
     },
-    move: { enable: true, speed: 0.4, outModes: { default: "bounce" as const } },
+    move: { enable: true, speed: 0.4, outModes: { default: "bounce" } },
     opacity: { value: 0.5 },
     size: { value: { min: 1, max: 2.5 } },
   },
   interactivity: {
     events: { onHover: { enable: false } },
   },
-} as const;
+};
 
-const initParticlesEngine = async (engine: Engine) => {
+const initEngine = async (engine: Engine) => {
   await loadSlim(engine);
 };
 
-export function ParticlesRoot({ children }: { children: React.ReactNode }) {
-  return (
-    <ParticlesProvider init={initParticlesEngine}>
-      {children}
-    </ParticlesProvider>
-  );
-}
-
 function ParticlesContent({ id }: { id: string }) {
   const { loaded } = useParticlesProvider();
-
   if (!loaded) return null;
-
   return (
     <Particles
       id={id}
@@ -51,5 +41,9 @@ function ParticlesContent({ id }: { id: string }) {
 }
 
 export default function ParticleBackground({ id = "tsparticles" }: { id?: string }) {
-  return <ParticlesContent id={id} />;
+  return (
+    <ParticlesProvider init={initEngine}>
+      <ParticlesContent id={id} />
+    </ParticlesProvider>
+  );
 }

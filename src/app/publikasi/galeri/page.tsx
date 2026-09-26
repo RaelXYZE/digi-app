@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
-import data from "@/data/galeri.json";
-import type { GalleryItem } from "@/types";
+import galeriData from "@/data/galeri.json";
 import { PublicationCard } from "@/components/PublicationCard";
+import { isGalleryItem } from "@/utils/type-guards";
 
 export const metadata: Metadata = {
   title: `Galeri | ${SITE.shortName}`,
@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const items = (data as GalleryItem[]).slice().sort((a, b) => b.date.localeCompare(a.date));
+const items = (galeriData as unknown[])
+  .filter(isGalleryItem)
+  .slice()
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 export default function GaleriPage() {
   return (

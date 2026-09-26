@@ -7,7 +7,7 @@ import Header from "@/layouts/Header";
 import Footer from "@/layouts/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const title = `${SITE.name}:  ${SITE.fullName}`;
+const title = `${SITE.name}: ${SITE.fullName}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -62,13 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="id" data-scroll-behavior="smooth">
-      <body>
-        <a
-          href="#main-content"
-          className="sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-navy-deep"
-        >
-          Lewati ke konten utama
-        </a>
+        <body>
         <script
           type="application/ld+json"
           nonce={nonce}

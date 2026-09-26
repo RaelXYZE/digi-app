@@ -64,11 +64,11 @@ export default function Layanan() {
           </div>
         </div>
 
-        <p role="status" className="mt-4 text-step--1 text-ink-soft">
+        <p role="status" aria-live="polite" className="mt-4 text-step--1 text-ink-soft">
           {query.trim()
             ? results.length > 0
               ? `${results.length} layanan ditemukan.`
-              : ""
+              : `Tidak ada layanan yang cocok dengan "${query.trim()}".`
             : `${LAYANAN.length} layanan tersedia.`}
         </p>
 

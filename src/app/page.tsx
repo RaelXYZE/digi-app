@@ -6,7 +6,7 @@ import LayananPreview from "@/components/LayananPreview";
 import Berita from "@/components/Berita";
 
 export const metadata: Metadata = {
-  title: SITE.shortName,
+  title: `Beranda | ${SITE.shortName}`,
   description: SITE.description,
   alternates: { canonical: "/" },
 };

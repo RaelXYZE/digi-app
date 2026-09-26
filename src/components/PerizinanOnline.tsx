@@ -12,7 +12,7 @@ export default function PerizinanOnline() {
           Aplikasi Perizinan Online Ditjen Infrastruktur Digital
         </h2>
         <p className="mt-3 max-w-reading text-step-1 text-ink-soft">
-          Kamu dapat mengajukan secara mandiri
+          Anda dapat mengajukan secara mandiri
         </p>
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

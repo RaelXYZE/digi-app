@@ -32,40 +32,36 @@ export default function Header() {
   const sidebarRef = useRef<HTMLElement>(null);
   const isFirstRender = useRef(true);
 
-  // #8+#9 Focus management: move focus into sidebar on open,
-  // return focus to hamburger on close. Skip initial mount.
+  // When the mobile sidebar opens: move focus into it and trap Tab.
+  // When it closes: return focus to the hamburger. Skip initial mount.
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    if (open) {
-      const first = sidebarRef.current?.querySelector<HTMLElement>(
-        'a[href], button:not([disabled])',
-      );
-      (first ?? sidebarRef.current)?.focus();
-    } else {
+    if (!open) {
       buttonRef.current?.focus();
+      return;
     }
-  }, [open]);
+    const first = sidebarRef.current?.querySelector<HTMLElement>(
+      'a[href], button:not([disabled])',
+    );
+    (first ?? sidebarRef.current)?.focus();
 
-  // #5 Tab-trap inside the sidebar while open
-  useEffect(() => {
-    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
       const focusable = sidebarRef.current?.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled])',
       );
       if (!focusable?.length) return;
-      const first = focusable[0]!;
-      const last = focusable[focusable.length - 1]!;
-      if (e.shiftKey && document.activeElement === first) {
+      const elFirst = focusable[0];
+      const elLast = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === elFirst) {
         e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
+        elLast.focus();
+      } else if (!e.shiftKey && document.activeElement === elLast) {
         e.preventDefault();
-        first.focus();
+        elFirst.focus();
       }
     };
     document.addEventListener("keydown", onKey);
@@ -198,7 +194,7 @@ export default function Header() {
                   </li>
                 );
               }
-              const href = item.id === "beranda" ? "/" : isHome ? `#${item.id}` : `/#${item.id}`;
+              const href = isHome ? `#${item.id}` : `/#${item.id}`;
               return (
                 <li key={item.id}>
                   <Link
@@ -276,7 +272,7 @@ export default function Header() {
       </nav>
     </header>
 
-{/* Mobile full-screen menu — outside header to escape backdrop-filter containing block */}
+    {/* Mobile full-screen menu — outside header to escape backdrop-filter containing block */}
       {open && (
           <aside
             ref={sidebarRef}

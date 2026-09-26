@@ -1,6 +1,5 @@
 import { LAYANAN, QUICK_LINK_IDS } from "@/constants/layanan";
 import { ExternalLink } from "@/components/external-link";
-import { ParticlesRoot } from "@/components/tsParticles";
 import ParticleBackground from "@/components/tsParticles";
 
 const quickLinks = QUICK_LINK_IDS.map((id) => LAYANAN.find((l) => l.id === id)).filter(
@@ -9,7 +8,6 @@ const quickLinks = QUICK_LINK_IDS.map((id) => LAYANAN.find((l) => l.id === id)).
 
 export default function Hero() {
   return (
-    <ParticlesRoot>
     <section
       id="beranda"
       aria-labelledby="hero-heading"
@@ -74,7 +72,7 @@ export default function Hero() {
                   <span className="font-semibold text-white group-hover:underline">
                     {l.action}
                   </span>
-                  <span className="text-step--1 text-white/80">{l.name}</span>
+                  <span className="block text-step--1 text-white/80">{l.name}</span>
                 </ExternalLink>
               </li>
             ))}
@@ -82,6 +80,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-    </ParticlesRoot>
   );
 }

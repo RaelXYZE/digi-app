@@ -1,7 +1,6 @@
 import { SITE, SERVICE_HOURS } from "@/constants/site";
 import { BrandLockup } from "@/components/brand-lockup";
 import { SocialIcon } from "@/components/social-icon";
-import { ParticlesRoot } from "@/components/tsParticles";
 import ParticleBackground from "@/components/tsParticles";
 
 const linkClass =
@@ -14,7 +13,6 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <ParticlesRoot>
     <footer className="on-dark relative overflow-hidden bg-navy text-white bleed bleed-navy">
       <ParticleBackground id="tsparticles-footer" />
       <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -74,6 +72,5 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-    </ParticlesRoot>
   );
 }
