@@ -1,8 +1,7 @@
 import beritaData from "@/data/berita.json";
-import type { Article } from "@/types";
 import Link from "next/link";
-import { formatDate } from "@/utils/format-date";
 import { ExternalLink } from "@/components/external-link";
+import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { isArticle } from "@/utils/type-guards";
 
@@ -11,17 +10,6 @@ const articles = (beritaData as unknown[])
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 6);
-
-function Meta({ article }: { article: Article }) {
-  return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-step--1">
-      <span className="bg-mist px-2 py-0.5 font-semibold text-navy-deep">{article.category}</span>
-      <time dateTime={article.date} className="text-ink-soft">
-        {formatDate(article.date)}
-      </time>
-    </div>
-  );
-}
 
 export default function Berita() {
   const [featured, ...rest] = articles;
@@ -50,7 +38,7 @@ export default function Berita() {
         ) : (
           <div className="mt-10 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
             <article className="border-t-4 border-brand pt-5">
-              <Meta article={featured} />
+              <Meta date={featured.date} category={featured.category} />
               <h3 className="mt-4 font-display text-step-3 font-bold leading-tight">
                 <ExternalLink
                   href={featured.url}
@@ -68,7 +56,7 @@ export default function Berita() {
               {rest.map((article) => (
                 <li key={article.id}>
                   <article className="border-b border-line py-5">
-                    <Meta article={article} />
+                    <Meta date={article.date} category={article.category} />
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
                       <ExternalLink
                         href={article.url}

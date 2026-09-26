@@ -1,5 +1,5 @@
-import { formatDate } from "@/utils/format-date";
 import { ExternalLink } from "@/components/external-link";
+import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 
 type Props = {
@@ -13,22 +13,6 @@ type Props = {
 
 const cardClass =
   "flex h-full min-h-11 flex-col border border-line bg-white p-5 text-navy-deep transition-colors hover:border-brand hover:bg-mist no-underline";
-
-function Meta({ date, category }: { date?: string; category?: string }) {
-  if (!date && !category) return null;
-  return (
-    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-step--1">
-      {category && (
-        <span className="bg-mist px-2 py-0.5 font-semibold text-navy-deep">{category}</span>
-      )}
-      {date && (
-        <time dateTime={date} className="text-ink-soft">
-          {formatDate(date)}
-        </time>
-      )}
-    </div>
-  );
-}
 
 function Content({
   title,
@@ -47,7 +31,7 @@ function Content({
       <h2 className="font-display text-step-1 font-bold text-navy-deep">
         <Placeholder>{title}</Placeholder>
       </h2>
-      <Meta date={date} category={category} />
+      <Meta date={date} category={category} className="mt-2" />
       {summary && (
         <p className="mt-2 flex-1 text-ink-soft">
           <Placeholder>{summary}</Placeholder>

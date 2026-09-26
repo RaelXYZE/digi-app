@@ -29,10 +29,9 @@ export const NAV: readonly NavItem[] = [
     id: "tentang-kami",
     label: "Profil",
     children: [
-      { id: "profil", label: "Profil" },
-      { id: "visi-misi", label: "Visi & Misi" },
-      { id: "tugas-fungsi", label: "Tugas dan Fungsi" },
-      { id: "fokus-kerja", label: "Fokus Kerja" },
+      { id: "visi-misi", label: "Visi & Misi", href: "/profil#visi-misi" },
+      { id: "tugas-fungsi", label: "Tugas dan Fungsi", href: "/profil#tugas-fungsi" },
+      { id: "fokus-kerja", label: "Fokus Kerja", href: "/profil#fokus-kerja" },
     ],
   },
   {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV } from "@/constants/site";
 import { BrandLockup } from "@/components/brand-lockup";
+import { NavDropdown } from "@/components/NavDropdown";
 import { useActiveSection } from "@/hooks/use-active-section";
 import type { NavItem, NavChild } from "@/constants/site";
 
@@ -207,65 +208,16 @@ export default function Header() {
                 </li>
               );
             }
-            const isOpen = openDesktop === item.id;
             return (
-              <li
+              <NavDropdown
                 key={item.id}
-                className="relative"
-              >
-                <button
-                  type="button"
-                  data-dropdown-trigger={item.id}
-                  aria-haspopup="menu"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpenDesktop(isOpen ? null : item.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") setOpenDesktop(null);
-                    if (e.key === "ArrowDown") {
-                      e.preventDefault();
-                      const panel = document.querySelector<HTMLElement>(
-                        `[data-dropdown-panel="${item.id}"]`,
-                      );
-                      const first = panel?.querySelector<HTMLElement>(
-                        'a[href], button:not([disabled])',
-                      );
-                      first?.focus();
-                    }
-                  }}
-                  className={`flex min-h-11 items-center px-3 font-semibold transition-colors hover:text-brand active:text-brand ${
-                    (isOpen || isCurrentSection) ? "text-brand" : "text-ink"
-                  }`}
-                >
-                  {item.label}
-                  <svg viewBox="0 0 24 24" className="ml-1 h-4 w-4" aria-hidden="true" focusable="false">
-                    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                  </svg>
-                </button>
-                {isOpen && (
-                  <div
-                    data-dropdown-panel={item.id}
-                    role="menu"
-                    className="absolute left-0 top-full min-w-[12rem] border border-line bg-white shadow-sm"
-                  >
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.id}
-                        href={child.href ?? childHref(child, pathname)}
-                        role="menuitem"
-                        aria-current={
-                          child.href && pathname === child.href ? "page" : undefined
-                        }
-                        onClick={() => setOpenDesktop(null)}
-                        className={`flex min-h-11 items-center px-4 text-navy-deep no-underline hover:bg-mist hover:text-brand ${
-                          child.href && pathname === child.href ? "text-brand" : ""
-                        }`}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
+                item={item}
+                pathname={pathname}
+                isOpen={openDesktop === item.id}
+                isCurrentSection={isCurrentSection}
+                onToggle={() => setOpenDesktop(openDesktop === item.id ? null : item.id)}
+                onClose={() => setOpenDesktop(null)}
+              />
             );
           })}
         </ul>
