@@ -6,6 +6,13 @@ const quickLinks = QUICK_LINK_IDS.map((id) => LAYANAN.find((l) => l.id === id)).
   (l): l is NonNullable<typeof l> => Boolean(l),
 );
 
+const LOGOS = [
+  { src: "/LogoKomdigi.png", alt: "Kementerian Komunikasi dan Digital", width: 113, height: 36 },
+  { src: "/LogoDJID.png", alt: "Direktorat Jenderal Infrastruktur Digital", width: 116, height: 36 },
+  { src: "/LogoBerahklak.png", alt: "BerAKHLAK", width: 94, height: 36 },
+  { src: "/LogoBangsa.png", alt: "Bangga Melayani Bangsa", width: 82, height: 36 },
+] as const;
+
 export default function Hero() {
   return (
     <section
@@ -77,6 +84,26 @@ export default function Hero() {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      <div className="wrap relative mt-10">
+        <div
+          aria-label="Logo instansi dan program terkait"
+          className="flex flex-wrap items-center justify-center gap-8 rounded-lg bg-white px-8 py-6 shadow-lg sm:gap-12"
+        >
+          {LOGOS.map((logo) => (
+            // eslint-disable-next-line @next/next/no-img-element -- institutional logo, no optimization needed
+            <img
+              key={logo.src}
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
+              loading="lazy"
+              className="h-9 w-auto object-contain"
+            />
+          ))}
         </div>
       </div>
     </section>
