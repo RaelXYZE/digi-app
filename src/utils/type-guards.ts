@@ -1,4 +1,4 @@
-import type { Article, GalleryItem } from "@/types";
+import type { Article, GalleryItem, Employee } from "@/types";
 
 function isStringRecord(x: unknown): x is Record<string, unknown> {
   return typeof x === "object" && x !== null;
@@ -24,5 +24,15 @@ export function isGalleryItem(x: unknown): x is GalleryItem {
     typeof x.id === "string" &&
     typeof x.date === "string" &&
     typeof x.title === "string"
+  );
+}
+
+/** Runtime guard for Employee JSON. Fails loudly on malformed data. */
+export function isEmployee(x: unknown): x is Employee {
+  if (!isStringRecord(x)) return false;
+  return (
+    typeof x.id === "string" &&
+    typeof x.name === "string" &&
+    typeof x.position === "string"
   );
 }

@@ -30,3 +30,9 @@ export type GalleryItem = {
   date: string;
   title: string;
 };
+
+export type Employee = {
+  id: string;
+  name: string;
+  position: string;
+};

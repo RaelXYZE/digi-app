@@ -3,12 +3,12 @@ export const PROFILE = [
   "Balai Monitor Spektrum Frekuensi Radio Dan Infrastruktur Digital Kelas II Jayapura berperan strategis dalam mendukung transformasi digital nasional dengan memastikan pengelolaan spektrum frekuensi radio yang efisien dan bebas gangguan, memperkuat pengawasan terhadap penggunaan frekuensi ilegal, serta mendukung pengembangan teknologi komunikasi seperti 5G dan Internet of Things (IoT), khususnya di wilayah-wilayah dengan tantangan geografis seperti Papua dan daerah 3T lainnya.",
 ];
 
-export const VISION = "[ISI: pernyataan visi resmi kementerian]";
+export const VISION = "Menyediakan Layanan";
 
 export const MISSION = [
-  "[ISI: misi 1]",
-  "[ISI: misi 2]",
-  "[ISI: misi 3]",
+  "Layanan 1",
+  "Layanan 2",
+  "Layanan 3",
 ];
 
 export const DUTIES = [

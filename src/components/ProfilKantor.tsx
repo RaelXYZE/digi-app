@@ -6,7 +6,7 @@ export default function ProfilKantor() {
   return (
     <section className="section bg-white bleed bleed-white">
       <div className="wrap">
-        <h1 className="text-step-3 font-bold text-navy-deep">Profil</h1>
+        <h1 className="text-step-3 font-bold text-navy-deep">BALMON SFRID KELAS II JAYAPURA</h1>
 
         <div id="visi-misi" className="mt-10 grid gap-12 lg:grid-cols-[1fr_1fr] scroll-mt-20">
           <div>
@@ -17,13 +17,13 @@ export default function ProfilKantor() {
           </div>
           <div className="self-start bg-mist p-6 sm:p-8">
             <h2 className="font-display text-step-2 font-bold text-navy-deep">Misi</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-brand">
+            <ol className="mt-3 list-decimal space-y-2 pl-5 marker:text-brand">
               {MISSION.map((m) => (
                 <li key={m}>
                   <Placeholder>{m}</Placeholder>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
 
@@ -31,13 +31,13 @@ export default function ProfilKantor() {
           <h2 className="font-display text-step-2 font-bold text-navy-deep">
             Tugas dan fungsi
           </h2>
-          <ul className="mt-4 list-disc space-y-2 pl-5 marker:text-brand">
+          <ol className="mt-4 list-decimal space-y-2 pl-5 marker:text-brand">
             {DUTIES.map((d) => (
               <li key={d}>
                 <Placeholder>{d}</Placeholder>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
 
         <div id="fokus-kerja" className="mt-16 border-t border-line pt-12 scroll-mt-20">

@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/layanan",
     "/layanan/perizinan-online",
     "/profil",
+    "/profil/daftar-pegawai",
     "/publikasi/berita-terbaru",
     "/publikasi/pengumuman",
     "/publikasi/galeri",

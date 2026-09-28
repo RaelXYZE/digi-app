@@ -1,5 +1,5 @@
 const MESSAGE =
-  "Seluruh layanan Balmon Jayapura TIDAK DIPUNGUT BIAYA di luar tarif resmi PNBP. Jangan Memberi, Jangan Menerima — Berani Tolak, Berani Laporkan!";
+  "Seluruh layanan Balmon SFRID Kelas II Jayapura TIDAK DIPUNGUT BIAYA di luar tarif resmi PNBP. Jangan Memberi, Jangan Menerima — Berani Tolak, Berani Laporkan!";
 
 function WarningIcon({ className }: { className?: string }) {
   return (

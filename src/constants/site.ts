@@ -29,9 +29,8 @@ export const NAV: readonly NavItem[] = [
     id: "tentang-kami",
     label: "Profil",
     children: [
-      { id: "visi-misi", label: "Visi & Misi", href: "/profil#visi-misi" },
-      { id: "tugas-fungsi", label: "Tugas dan Fungsi", href: "/profil#tugas-fungsi" },
-      { id: "fokus-kerja", label: "Fokus Kerja", href: "/profil#fokus-kerja" },
+      { id: "profil-balmon", label: "Profil Balmon Jayapura", href: "/profil" },
+      { id: "daftar-pegawai", label: "Daftar Pegawai", href: "/profil/daftar-pegawai" },
     ],
   },
   {
