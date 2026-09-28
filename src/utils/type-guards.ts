@@ -23,7 +23,8 @@ export function isGalleryItem(x: unknown): x is GalleryItem {
   return (
     typeof x.id === "string" &&
     typeof x.date === "string" &&
-    typeof x.title === "string"
+    typeof x.title === "string" &&
+    (x.image === undefined || typeof x.image === "string")
   );
 }
 

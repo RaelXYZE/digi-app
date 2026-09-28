@@ -9,6 +9,7 @@ type Props = {
   summary?: string;
   url?: string;
   showImagePlaceholder?: boolean;
+  image?: string;
 };
 
 const cardClass =
@@ -20,14 +21,18 @@ function Content({
   category,
   summary,
   showImagePlaceholder,
+  image,
 }: Omit<Props, "url">) {
   return (
     <>
-      {showImagePlaceholder && (
+      {image ? (
+        // eslint-disable-next-line @next/next/no-img-element -- static gallery photo, no optimization needed
+        <img src={image} alt={title} loading="lazy" className="mb-4 aspect-video w-full shrink-0 border border-line bg-mist object-cover" />
+      ) : showImagePlaceholder ? (
         <div className="mb-4 flex aspect-video items-center justify-center border border-line bg-mist">
           <Placeholder>{"[ISI: Foto kegiatan]"}</Placeholder>
         </div>
-      )}
+      ) : null}
       <h2 className="font-display text-step-1 font-bold text-navy-deep">
         <Placeholder>{title}</Placeholder>
       </h2>
@@ -48,6 +53,7 @@ export function PublicationCard({
   summary,
   url,
   showImagePlaceholder,
+  image,
 }: Props) {
   if (!url) {
     return (
@@ -58,6 +64,7 @@ export function PublicationCard({
           category={category}
           summary={summary}
           showImagePlaceholder={showImagePlaceholder}
+          image={image}
         />
       </li>
     );
@@ -72,6 +79,7 @@ export function PublicationCard({
           category={category}
           summary={summary}
           showImagePlaceholder={showImagePlaceholder}
+          image={image}
         />
       </ExternalLink>
     </li>

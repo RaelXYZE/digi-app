@@ -29,6 +29,8 @@ export type GalleryItem = {
   /** ISO format: YYYY-MM-DD */
   date: string;
   title: string;
+  /** Path under /public, e.g. "/Galeri/Sample1.Jpeg" */
+  image?: string;
 };
 
 export type Employee = {
