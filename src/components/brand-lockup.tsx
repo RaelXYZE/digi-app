@@ -11,7 +11,7 @@ export function BrandLockup({ variant, theme = "light" }: BrandLockupProps) {
   const nameColor = isDark ? "text-white" : "text-navy-deep";
   const name = variant === "header" ? SITE.shortName : SITE.officialName;
   const nameSize = variant === "header" ? "text-step--1" : "text-step-1";
-  const eyebrowSize = variant === "header" ? "text-step--2" : "text-step--1";
+  const eyebrowSize = variant === "header" ? "text-[0.625rem]" : "text-step--1";
 
   return (
     <span className="flex flex-col leading-snug">
