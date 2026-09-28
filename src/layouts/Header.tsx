@@ -195,7 +195,7 @@ export default function Header() {
                   </li>
                 );
               }
-              const href = isHome ? `#${item.id}` : `/#${item.id}`;
+              const href = item.id === "beranda" ? "/" : isHome ? `#${item.id}` : `/#${item.id}`;
               return (
                 <li key={item.id}>
                   <Link
