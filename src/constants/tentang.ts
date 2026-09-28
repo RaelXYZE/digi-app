@@ -24,6 +24,9 @@ export const DUTIES = [
 
 export const HEAD = "RACHIM PRIBADI, S.E., M.M.";
 
+// File media kantor di bawah /public (mis. "/Profil/kantor.jpeg").
+export const OFFICE_MEDIA: { type: "image" | "video"; src: string; alt: string; poster?: string } | null = null;
+
 // Taken from the "Transformasi Digital" section of the source site.
 export const FOCUS_AREAS = [
   {

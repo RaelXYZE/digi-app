@@ -1,4 +1,4 @@
-import { VISION, MISSION, DUTIES, FOCUS_AREAS } from "@/constants/tentang";
+import { PROFILE, OFFICE_MEDIA, VISION, MISSION, DUTIES, FOCUS_AREAS } from "@/constants/tentang";
 import { ExternalLink } from "@/components/external-link";
 import { Placeholder } from "@/components/Placeholder";
 
@@ -8,7 +8,58 @@ export default function ProfilKantor() {
       <div className="wrap">
         <h1 className="text-step-3 font-bold text-navy-deep">BALMON SFRID KELAS II JAYAPURA</h1>
 
-        <div id="visi-misi" className="mt-10 grid gap-12 lg:grid-cols-[1fr_1fr] scroll-mt-20">
+        <div className="mt-10 overflow-hidden rounded-lg border border-line bg-white p-6 sm:p-8">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 translate-x-3 translate-y-3 rounded-lg bg-mist"
+              />
+              <div className="relative aspect-video overflow-hidden rounded-lg border border-line shadow-md">
+                {OFFICE_MEDIA === null ? (
+                  <div className="flex h-full w-full items-center justify-center bg-mist">
+                    <Placeholder>{"[ISI: Foto/Video kantor]"}</Placeholder>
+                  </div>
+                ) : OFFICE_MEDIA.type === "image" ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- office photo mockup, no optimization needed
+                  <img
+                    src={OFFICE_MEDIA.src}
+                    alt={OFFICE_MEDIA.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <video
+                    controls
+                    preload="metadata"
+                    playsInline
+                    poster={OFFICE_MEDIA.poster}
+                    className="h-full w-full bg-navy-deep"
+                  >
+                    <source src={OFFICE_MEDIA.src} />
+                    Browser Anda tidak mendukung pemutaran video.
+                  </video>
+                )}
+                <span className="pointer-events-none absolute left-3 top-3 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-step--2 font-semibold text-navy-deep">
+                  Kantor Balmon Jayapura
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="text-step--2 font-semibold uppercase tracking-wide text-brand">
+                Profil Singkat
+              </p>
+              <h2 className="mt-2 font-display text-step-2 font-bold text-navy-deep">
+                Mengenal Balmon Jayapura
+              </h2>
+              <p className="mt-3 text-step-1 leading-[1.7]">
+                <Placeholder>{PROFILE[0]}</Placeholder>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="visi-misi" className="mt-12 grid gap-12 lg:grid-cols-[1fr_1fr] scroll-mt-20">
           <div>
             <h2 className="font-display text-step-2 font-bold text-navy-deep">Visi</h2>
             <p className="mt-3 font-display text-step-1 leading-[1.7]">
