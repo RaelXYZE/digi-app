@@ -62,4 +62,4 @@ Semua placeholder tampil dengan latar kuning dan berawalan `[ISI: ...]`. Cari de
 
 ## Yang sengaja tidak dibawa dari situs sumber
 
-Widget aksesibilitas pihak ketiga, TTS/penerjemah, Google Analytics, banner cookie, carousel otomatis, "Topik Pilihanku", statistik konten negatif, dan galeri tautan. Semuanya di luar ruang lingkup `AGENTS.md`.
+Widget aksesibilitas pihak ketiga, TTS/penerjemah, Google Analytics, banner cookie, carousel otomatis, "Topik Pilihanku", statistik konten negatif, dan galeri tautan. Semuanya di luar ruang lingkup environment.
