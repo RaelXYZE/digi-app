@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/publikasi/berita-terbaru",
     "/publikasi/pengumuman",
     "/publikasi/galeri",
+    "/publikasi/laporan-kinerja",
   ];
 
   const lastModified = new Date();

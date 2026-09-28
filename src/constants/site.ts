@@ -48,6 +48,7 @@ export const NAV: readonly NavItem[] = [
       { id: "berita-terbaru", label: "Berita Terbaru", href: "/publikasi/berita-terbaru" },
       { id: "pengumuman", label: "Pengumuman", href: "/publikasi/pengumuman" },
       { id: "galeri", label: "Galeri", href: "/publikasi/galeri" },
+      { id: "laporan-kinerja", label: "Laporan Kinerja", href: "/publikasi/laporan-kinerja" },
     ],
   },
 ];
