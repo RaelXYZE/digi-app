@@ -20,6 +20,16 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="section hero-screen on-dark relative overflow-hidden bg-navy-deep text-white bleed bleed-navy-deep"
     >
+      {/* eslint-disable-next-line @next/next/no-img-element -- hero background image, no optimization needed */}
+      <img
+        src="/bg1.png"
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-linear-to-r from-navy-deep/90 via-navy-deep/70 to-navy-deep/40" />
+
       {/* Signal arcs: decorative, no informational content */}
       <svg
         aria-hidden="true"
@@ -42,12 +52,12 @@ export default function Hero() {
         <div className="fade-in">
           <h1
             id="hero-heading"
-            className="max-w-[24ch] sm:max-w-[22ch] text-step-2 sm:text-step-3 font-bold leading-[1.15]"
+            className="max-w-[24ch] sm:max-w-[22ch] text-step-2 sm:text-step-3 font-bold leading-[1.15] [text-shadow:0_2px_12px_rgba(2,30,78,0.6)]"
           >
             Balai Monitor Spektrum Frekuensi Radio dan Infrastruktur Digital{" "}
-            <span className="text-white/75">Kelas II Jayapura</span>
+            <span className="text-white">Kelas II Jayapura</span>
           </h1>
-          <p className="mt-6 max-w-reading text-step-1 text-white/90">
+          <p className="mt-6 max-w-reading text-step-1 text-white [text-shadow:0_2px_12px_rgba(2,30,78,0.6)]">
             Ajukan izin, laporkan konten atau nomor bermasalah, dan ikuti kabar terbaru dari
             Balmon Jayapura.
           </p>
@@ -67,7 +77,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="fade-in fade-in-delayed bg-white/[0.07] p-6 backdrop-blur-sm">
+        <div className="fade-in fade-in-delayed bg-navy-deep/60 p-6 backdrop-blur-sm">
           <h2 className="font-display text-step-1 font-bold">Paling sering dicari</h2>
           <ul className="mt-2 divide-y divide-white/20">
             {quickLinks.map((l) => (
@@ -79,7 +89,7 @@ export default function Hero() {
                   <span className="font-semibold text-white group-hover:underline">
                     {l.action}
                   </span>
-                  <span className="block text-step--1 text-white/80">{l.name}</span>
+                  <span className="block text-step--1 text-white/90">{l.name}</span>
                 </ExternalLink>
               </li>
             ))}
