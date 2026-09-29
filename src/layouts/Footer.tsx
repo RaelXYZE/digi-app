@@ -39,7 +39,7 @@ export default function Footer() {
             </p>
             <p>
               <a href={`mailto:${SITE.email}`} className={`${linkClass} gap-2`}>
-                <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
+                <span className="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
                   <img src="/envelope-line-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-contain" />
                 </span>
