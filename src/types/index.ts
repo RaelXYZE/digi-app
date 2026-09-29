@@ -22,7 +22,7 @@ export type Service = {
   steps?: string[];
 };
 
-export type SocialPlatform = "instagram" | "tiktok";
+export type SocialPlatform = "instagram" | "tiktok" | "whatsapp";
 
 export type GalleryItem = {
   id: string;

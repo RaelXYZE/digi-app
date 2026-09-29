@@ -17,6 +17,7 @@ export const SITE = {
   social: [
     { id: "instagram", name: "Instagram", url: "https://www.instagram.com/balmon_jayapura/" },
     { id: "tiktok", name: "TikTok", url: "https://www.tiktok.com/@balmonjayapura?_r=1&_t=ZS-99zaMlNeKjE" },
+    { id: "whatsapp", name: "WhatsApp", url: "https://wa.me/628114801191" },
   ] satisfies { id: SocialPlatform; name: string; url: string }[],
 } as const;
 
