@@ -19,14 +19,24 @@ export default function Footer() {
         <div>
           <BrandLockup variant="footer" theme="dark" />
           <address className="mt-4 max-w-reading not-italic text-white/90">
-            <p>{SITE.address}</p>
             <p>
-              <a href={SITE.phoneHref} className={linkClass}>
+              <span className="inline-flex items-center gap-2">
+                {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
+                <img src="/pin-location-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-4 w-4 shrink-0" />
+                {SITE.address}
+              </span>
+            </p>
+            <p>
+              <a href={SITE.phoneHref} className={`${linkClass} gap-2`}>
+                {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
+                <img src="/phone-line-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-4 w-4 shrink-0" />
                 {SITE.phone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${SITE.email}`} className={linkClass}>
+              <a href={`mailto:${SITE.email}`} className={`${linkClass} gap-2`}>
+                {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
+                <img src="/envelope-line-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-4 w-4 shrink-0" />
                 {SITE.email}
               </a>
             </p>
