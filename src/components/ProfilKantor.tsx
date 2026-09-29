@@ -18,7 +18,7 @@ export default function ProfilKantor() {
               <div className="relative aspect-video overflow-hidden rounded-lg border border-line shadow-md">
                 {OFFICE_MEDIA === null ? (
                   <div className="flex h-full w-full items-center justify-center bg-mist">
-                    <Placeholder>{"[ISI: Foto/Video kantor]"}</Placeholder>
+                    <Placeholder>{"Coming Soon"}</Placeholder>
                   </div>
                 ) : OFFICE_MEDIA.type === "image" ? (
                   // eslint-disable-next-line @next/next/no-img-element -- office photo mockup, no optimization needed

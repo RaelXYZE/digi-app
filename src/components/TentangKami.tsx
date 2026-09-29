@@ -23,7 +23,7 @@ export default function TentangKami() {
           </div>
 
           <div className="flex aspect-video items-center justify-center self-start border border-line bg-mist">
-            <Placeholder>{"[ISI: Foto/Video kantor]"}</Placeholder>
+            <Placeholder>{"Coming Soon"}</Placeholder>
           </div>
         </div>
       </div>

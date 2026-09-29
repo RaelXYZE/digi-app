@@ -30,7 +30,7 @@ function Content({
         <img src={image} alt={title} loading="lazy" className="mb-4 aspect-video w-full shrink-0 border border-line bg-mist object-cover" />
       ) : showImagePlaceholder ? (
         <div className="mb-4 flex aspect-video items-center justify-center border border-line bg-mist">
-          <Placeholder>{"[ISI: Foto kegiatan]"}</Placeholder>
+          <Placeholder>{"Coming Soon"}</Placeholder>
         </div>
       ) : null}
       <h2 className="font-display text-step-1 font-bold text-navy-deep">
