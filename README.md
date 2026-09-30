@@ -1,4 +1,4 @@
-# Landing page Komdigi (Next.js)
+# Homepage Balmon SFRID kelas 2 Jayapura (Next.js)
 
 Halaman tunggal dengan empat bagian: Beranda, Tentang Kami, Layanan, Berita.
 Dibuat mengikuti `AGENTS.md`, dengan isi yang diambil dari hasil scraping beranda komdigi.go.id.
@@ -54,7 +54,7 @@ Semua placeholder tampil dengan latar kuning dan berawalan `[ISI: ...]`. Cari de
 - **Tanggal berita** diambil dari tanggal unggah gambar pada URL sumber (mis. `uploads/2026/9/17/`), bukan dari tanggal terbit resmi. Cocokkan dengan halaman beritanya.
 - **Deskripsi layanan** untuk Sertifikasi, Perizinan, Pengembangan SDM, Instansi pemerintah, Umum, dan Aduan Konten berasal dari situs sumber (diringkas). Deskripsi Aduan Nomor, Cek Rekening, Cek Hoaks, LAPOR!, dan PPID ditulis ulang dari nama layanannya; pastikan sesuai.
 - **Teks "Program kerja 2019–2024"** di situs sumber tidak dipakai karena sudah usang. Empat fokus kerja dipertahankan.
-- **Nama instansi** memakai "Komdigi" (Kementerian Komunikasi dan Digital), sesuai situs sumber, bukan "Kominfo".
+- **Nama instansi** memakai "Komdigi" (Kementerian Komunikasi dan Digital), sesuai situs sumber.
 - **Logo resmi** belum dipakai karena butuh izin/aset resmi. Header memakai tanda sinyal sederhana. Letakkan logo di `public/` dan ganti `TandaSinyal` di `src/layouts/Header.tsx` bila sudah ada.
 - **Gambar** tidak dipakai sama sekali (hero, berita). Halaman tetap ringan; tambahkan bila sudah ada aset berizin.
 - **OG image** belum ada; Open Graph memakai kartu `summary` tanpa gambar.
