@@ -11,6 +11,7 @@ const LOGOS = [
   { src: "/LogoDJID.png", alt: "Direktorat Jenderal Infrastruktur Digital", width: 116, height: 36 },
   { src: "/LogoBerahklak.png", alt: "BerAKHLAK", width: 94, height: 36 },
   { src: "/LogoBangsa.png", alt: "Bangga Melayani Bangsa", width: 82, height: 36 },
+  { src: "/logoSGratifikasi.png", alt: "Stop Gratifikasi", width: 60, height: 36 },
 ] as const;
 
 export default function Hero() {
