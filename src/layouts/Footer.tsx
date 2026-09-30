@@ -23,7 +23,7 @@ export default function Footer() {
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
-                  <img src="/pin-location-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-contain" />
+                  <img src="/pin-location-icon.svg" alt="" aria-hidden="true" loading="lazy" width={16} height={16} className="h-full w-full object-contain" />
                 </span>
                 {SITE.address}
               </span>
@@ -32,7 +32,7 @@ export default function Footer() {
               <a href={SITE.phoneHref} className={`${linkClass} gap-2`}>
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
-                  <img src="/phone-line-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-contain" />
+                  <img src="/phone-line-icon.svg" alt="" aria-hidden="true" loading="lazy" width={16} height={16} className="h-full w-full object-contain" />
                 </span>
                 {SITE.phone}
               </a>
@@ -41,7 +41,7 @@ export default function Footer() {
               <a href={`mailto:${SITE.email}`} className={`${linkClass} gap-2`}>
                 <span className="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
-                  <img src="/envelope-line-icon.svg" alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-contain" />
+                  <img src="/envelope-line-icon.svg" alt="" aria-hidden="true" loading="lazy" width={16} height={16} className="h-full w-full object-contain" />
                 </span>
                 {SITE.email}
               </a>

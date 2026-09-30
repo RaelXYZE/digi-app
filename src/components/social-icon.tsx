@@ -14,6 +14,6 @@ type SocialIconProps = {
 export function SocialIcon({ platform, className }: SocialIconProps) {
   return (
     // eslint-disable-next-line @next/next/no-img-element -- social media brand icon, no optimization needed
-    <img src={ICON_SRC[platform]} alt="" aria-hidden="true" loading="lazy" className={className} />
+    <img src={ICON_SRC[platform]} alt="" aria-hidden="true" loading="lazy" width={24} height={24} className={className} />
   );
 }

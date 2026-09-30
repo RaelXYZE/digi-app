@@ -111,6 +111,7 @@ export default function Hero() {
               width={logo.width}
               height={logo.height}
               loading="lazy"
+              style={{ aspectRatio: `${logo.width} / ${logo.height}` }}
               className="h-9 w-auto object-contain"
             />
           ))}
