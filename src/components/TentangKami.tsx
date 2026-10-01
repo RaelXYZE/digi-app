@@ -4,8 +4,17 @@ import { Placeholder } from "@/components/Placeholder";
 
 export default function TentangKami() {
   return (
-    <section id="tentang-kami" aria-labelledby="about-heading" className="section bg-white bleed bleed-white">
-      <div className="wrap">
+    <section id="tentang-kami" aria-labelledby="about-heading" className="section relative overflow-hidden bg-white bleed bleed-white">
+      {/* eslint-disable-next-line @next/next/no-img-element -- section background image, no optimization needed */}
+      <img
+        src="/bg2.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/85" />
+      <div className="wrap relative">
         <h2 id="about-heading" className="max-w-[35ch] text-step-3 font-bold text-navy-deep">
           Tentang {SITE.name}
         </h2>
