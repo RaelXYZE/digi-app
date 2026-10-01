@@ -6,6 +6,8 @@ export type Article = {
   category: string;
   summary: string;
   url?: string;
+  /** Full article body. Placeholder until the backend is connected. */
+  content?: string;
 };
 
 export type ServiceGroup = "utama" | "pengaduan" | "informasi";
