@@ -101,20 +101,21 @@ export default function Hero() {
       <div className="wrap relative mt-10">
         <div
           aria-label="Logo instansi dan program terkait"
-          className="flex flex-wrap content-center items-center justify-center gap-6 rounded-lg bg-white px-8 py-6 shadow-lg sm:gap-8"
+          className="flex flex-wrap content-center items-center justify-center gap-6 sm:gap-8"
         >
           {LOGOS.map((logo) => (
-            // eslint-disable-next-line @next/next/no-img-element -- institutional logo, no optimization needed
-            <img
-              key={logo.src}
-              src={logo.src}
-              alt={logo.alt}
-              width={logo.width}
-              height={logo.height}
-              loading="lazy"
-              style={{ aspectRatio: `${logo.width} / ${logo.height}` }}
-              className="h-9 w-auto object-contain"
-            />
+            <span key={logo.src} className="flex items-center justify-center rounded-lg bg-white/90 px-4 py-3 backdrop-blur-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element -- institutional logo, no optimization needed */}
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                loading="lazy"
+                style={{ aspectRatio: `${logo.width} / ${logo.height}` }}
+                className="h-9 w-auto object-contain"
+              />
+            </span>
           ))}
         </div>
       </div>
