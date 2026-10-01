@@ -11,9 +11,9 @@ export default function TentangKami() {
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-left"
       />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/85" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/60 sm:bg-white/85" />
       <div className="wrap relative">
         <h2 id="about-heading" className="max-w-[35ch] text-step-3 font-bold text-navy-deep">
           Tentang {SITE.name}
