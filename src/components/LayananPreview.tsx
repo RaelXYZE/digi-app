@@ -44,7 +44,7 @@ export default function LayananPreview() {
           Pilih layanan yang Anda butuhkan. Setiap tautan membuka situs layanan resmi.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {TABS.map((tab) => {
             const isActive = tab.id === activeTabId;
             return (
