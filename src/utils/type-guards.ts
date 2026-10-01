@@ -13,7 +13,7 @@ export function isArticle(x: unknown): x is Article {
     typeof x.date === "string" &&
     typeof x.category === "string" &&
     typeof x.summary === "string" &&
-    typeof x.url === "string"
+    (x.url === undefined || typeof x.url === "string")
   );
 }
 

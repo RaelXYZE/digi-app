@@ -58,6 +58,10 @@ const jsonLd = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Intentional: the per-request CSP nonce from src/proxy.ts requires dynamic
+  // rendering (Next.js docs: nonce-based CSP disables SSG/ISR and is
+  // incompatible with PPR). We accept per-request rendering for the strictest
+  // script-src. Revisit if/when the CSP moves away from nonces.
   const nonce = (await headers()).get("x-nonce") ?? "";
 
   return (

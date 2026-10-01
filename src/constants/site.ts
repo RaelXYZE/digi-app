@@ -59,4 +59,15 @@ export const SERVICE_HOURS: { day: string; time: string }[] = [
   { day: "Jum'at", time: "08.00 - 16.00 WIB" },
 ];
 
+// Routes whose pages export robots: { index: false, follow: true }.
+// Kept out of the sitemap so crawlers don't get mixed signals.
+// Update together with the pages' robots flags.
+export const NOINDEX_ROUTES: readonly string[] = [
+  "/profil/daftar-pegawai",
+  "/publikasi/berita-terbaru",
+  "/publikasi/pengumuman",
+  "/publikasi/galeri",
+  "/publikasi/laporan-kinerja",
+];
+
 export type SectionId = "beranda" | "tentang-kami" | "layanan" | "berita";

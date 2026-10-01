@@ -1,7 +1,13 @@
-import { SITE, SERVICE_HOURS } from "@/constants/site";
+import Link from "next/link";
+import { NAV, SERVICE_HOURS, SITE } from "@/constants/site";
 import { BrandLockup } from "@/components/brand-lockup";
 import { SocialIcon } from "@/components/social-icon";
 import ParticleBackground from "@/components/tsParticles";
+
+const QUICK_LINKS = NAV.map((item) => ({
+  label: item.label,
+  href: item.href ?? (item.id === "beranda" ? "/" : (item.children?.[0]?.href ?? "/")),
+}));
 
 const linkClass =
   "inline-flex min-h-11 items-center text-white underline-offset-4 hover:underline";
@@ -15,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-navy text-white bleed bleed-navy">
       <ParticleBackground id="tsparticles-footer" />
-      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr] lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <BrandLockup variant="footer" theme="dark" />
           <address className="mt-4 max-w-reading not-italic text-white/90">
@@ -60,6 +66,19 @@ export default function Footer() {
             ))}
           </dl>
         </div>
+
+        <nav aria-label="Tautan cepat">
+          <h2 className="font-display text-step-1 font-bold">Tautan cepat</h2>
+          <ul className="mt-3">
+            {QUICK_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={linkClass}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <nav aria-label="Media sosial resmi">
           <h2 className="font-display text-step-1 font-bold">Media sosial resmi</h2>

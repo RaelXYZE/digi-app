@@ -40,12 +40,16 @@ export default function Berita() {
             <article className="border-t-4 border-brand pt-5">
               <Meta date={featured.date} category={featured.category} />
               <h3 className="mt-4 font-display text-step-3 font-bold leading-tight">
-                <ExternalLink
-                  href={featured.url}
-                  className="text-navy-deep underline-offset-4 hover:underline"
-                >
-                  {featured.title}
-                </ExternalLink>
+                {!featured.url ? (
+                  <Placeholder>{featured.title}</Placeholder>
+                ) : (
+                  <ExternalLink
+                    href={featured.url}
+                    className="text-navy-deep underline-offset-4 hover:underline"
+                  >
+                    {featured.title}
+                  </ExternalLink>
+                )}
               </h3>
               <p className="mt-4 max-w-reading text-step-1 text-ink-soft">
                 <Placeholder>{featured.summary}</Placeholder>
@@ -58,12 +62,16 @@ export default function Berita() {
                   <article className="border-b border-line py-5">
                     <Meta date={article.date} category={article.category} />
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
-                      <ExternalLink
-                        href={article.url}
-                        className="text-navy-deep underline-offset-4 hover:underline"
-                      >
-                        {article.title}
-                      </ExternalLink>
+                      {!article.url ? (
+                        <Placeholder>{article.title}</Placeholder>
+                      ) : (
+                        <ExternalLink
+                          href={article.url}
+                          className="text-navy-deep underline-offset-4 hover:underline"
+                        >
+                          {article.title}
+                        </ExternalLink>
+                      )}
                     </h3>
                     <p className="mt-2 text-ink-soft">
                       <Placeholder>{article.summary}</Placeholder>

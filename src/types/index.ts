@@ -5,7 +5,7 @@ export type Article = {
   date: string;
   category: string;
   summary: string;
-  url: string;
+  url?: string;
 };
 
 export type ServiceGroup = "utama" | "pengaduan" | "informasi";

@@ -5,21 +5,17 @@ import { LAYANAN } from "@/constants/layanan";
 import { SITE } from "@/constants/site";
 import { ExternalLink } from "@/components/external-link";
 import { Placeholder } from "@/components/Placeholder";
-
-type Params = Promise<{ slug: string }>;
+import { isPlaceholderService } from "@/utils/placeholder";
 
 export function generateStaticParams() {
   return LAYANAN.map((s) => ({ slug: s.id }));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata(props: PageProps<'/layanan/[slug]'>): Promise<Metadata> {
+  const { slug } = await props.params;
   const service = LAYANAN.find((s) => s.id === slug);
   if (!service) return { title: "Layanan tidak ditemukan" };
-  const hasPlaceholder =
-    service.longDescription?.startsWith("[ISI") ||
-    service.requirements?.some((r) => r.startsWith("[ISI")) ||
-    service.steps?.some((s) => s.startsWith("[ISI"));
+  const hasPlaceholder = isPlaceholderService(service);
   return {
     title: `${service.name} | ${SITE.shortName}`,
     description: service.description,
@@ -28,8 +24,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function ServiceDetailPage({ params }: { params: Params }) {
-  const { slug } = await params;
+export default async function ServiceDetailPage(props: PageProps<'/layanan/[slug]'>) {
+  const { slug } = await props.params;
   const service = LAYANAN.find((s) => s.id === slug);
   if (!service) notFound();
 

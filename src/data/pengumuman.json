@@ -4,23 +4,20 @@
     "title": "Judul",
     "date": "2026-09-20",
     "category": "Pengumuman",
-    "summary": "Ringkasan1",
-    "url": ""
+    "summary": "Ringkasan1"
   },
   {
     "id": "pengumuman-2-2026-09-15",
     "title": "Judul2",
     "date": "2026-09-15",
     "category": "Pengumuman",
-    "summary": "Ringkasan2",
-    "url": ""
+    "summary": "Ringkasan2"
   },
   {
     "id": "pengumuman-3-2026-09-10",
     "title": "Judul3",
     "date": "2026-09-10",
     "category": "Pengumuman",
-    "summary": "Ringkasan3",
-    "url": ""
+    "summary": "Ringkasan3"
   }
 ]
