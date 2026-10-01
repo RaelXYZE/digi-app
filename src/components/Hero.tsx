@@ -101,10 +101,10 @@ export default function Hero() {
       <div className="wrap relative mt-10">
         <div
           aria-label="Logo instansi dan program terkait"
-          className="flex flex-wrap content-center items-center justify-center gap-6 sm:gap-8"
+          className="flex flex-wrap content-center items-center justify-center gap-4 sm:gap-5"
         >
           {LOGOS.map((logo) => (
-            <span key={logo.src} className="flex items-center justify-center rounded-lg bg-white/90 px-4 py-3 backdrop-blur-sm">
+            <span key={logo.src} className="flex items-center justify-center rounded-lg bg-white/90 px-3 py-2 backdrop-blur-sm">
               {/* eslint-disable-next-line @next/next/no-img-element -- institutional logo, no optimization needed */}
               <img
                 src={logo.src}
