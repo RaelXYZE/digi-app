@@ -36,9 +36,11 @@ function ArticleCard({ article }: { article: Article }) {
             <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
           </div>
         )}
-        <h2 className="p-5 font-display text-step-1 font-bold text-navy-deep">
-          {article.title}
-        </h2>
+        <div className="p-5">
+          <h2 className="line-clamp-2 font-display text-step-0 font-bold text-navy-deep">
+            {article.title}
+          </h2>
+        </div>
       </Link>
     </li>
   );
