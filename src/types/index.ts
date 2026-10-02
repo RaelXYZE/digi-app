@@ -8,6 +8,10 @@ export type Article = {
   url?: string;
   /** Full article body. Placeholder until the backend is connected. */
   content?: string;
+  /** Path under /public, e.g. "/Berita/artikel-1.jpg". */
+  image?: string;
+  /** Name of the writer/editor who uploaded the article. */
+  author?: string;
 };
 
 export type ServiceGroup = "utama" | "pengaduan" | "informasi";

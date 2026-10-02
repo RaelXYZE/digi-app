@@ -1,6 +1,5 @@
 import beritaData from "@/data/berita.json";
 import Link from "next/link";
-import { ExternalLink } from "@/components/external-link";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { isArticle } from "@/utils/type-guards";
@@ -25,8 +24,7 @@ export default function Berita() {
           <div className="mt-8 border border-line bg-mist p-6">
             <p className="font-semibold text-navy-deep">Belum ada berita yang ditampilkan.</p>
             <p className="mt-1 text-ink-soft">
-              Daftar berita sedang dimuat ulang. Anda tetap bisa membaca seluruh berita di situs
-              resmi.
+              Anda tetap bisa membaca seluruh berita di halaman Berita Terbaru.
             </p>
             <Link
               href="/publikasi/berita-terbaru"
@@ -38,18 +36,27 @@ export default function Berita() {
         ) : (
           <div className="mt-10 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
             <article className="border-t-4 border-brand pt-5">
+              {featured.image ? (
+                // eslint-disable-next-line @next/next/no-img-element -- article thumbnail, no optimization needed
+                <img src={featured.image} alt={featured.title} loading="lazy" className="mb-4 aspect-video w-full border border-line bg-mist object-cover" />
+              ) : (
+                <div className="mb-4 flex aspect-video items-center justify-center border border-line bg-mist">
+                  <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
+                </div>
+              )}
               <Meta date={featured.date} category={featured.category} />
+              {featured.author && (
+                <p className="mt-1 text-step--1 text-ink-soft">
+                  Oleh <Placeholder>{featured.author}</Placeholder>
+                </p>
+              )}
               <h3 className="mt-4 font-display text-step-3 font-bold leading-tight">
-                {!featured.url ? (
-                  <Placeholder>{featured.title}</Placeholder>
-                ) : (
-                  <ExternalLink
-                    href={featured.url}
-                    className="text-navy-deep underline-offset-4 hover:underline"
-                  >
-                    {featured.title}
-                  </ExternalLink>
-                )}
+                <Link
+                  href={`/publikasi/berita-terbaru/${featured.id}`}
+                  className="text-navy-deep underline-offset-4 hover:underline"
+                >
+                  {featured.title}
+                </Link>
               </h3>
               <p className="mt-4 max-w-reading text-step-1 text-ink-soft">
                 <Placeholder>{featured.summary}</Placeholder>
@@ -62,16 +69,12 @@ export default function Berita() {
                   <article className="border-b border-line py-5">
                     <Meta date={article.date} category={article.category} />
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
-                      {!article.url ? (
-                        <Placeholder>{article.title}</Placeholder>
-                      ) : (
-                        <ExternalLink
-                          href={article.url}
-                          className="text-navy-deep underline-offset-4 hover:underline"
-                        >
-                          {article.title}
-                        </ExternalLink>
-                      )}
+                      <Link
+                        href={`/publikasi/berita-terbaru/${article.id}`}
+                        className="text-navy-deep underline-offset-4 hover:underline"
+                      >
+                        {article.title}
+                      </Link>
                     </h3>
                     <p className="mt-2 text-ink-soft">
                       <Placeholder>{article.summary}</Placeholder>

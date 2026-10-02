@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import beritaData from "@/data/berita.json";
 import { SITE } from "@/constants/site";
-import { ExternalLink } from "@/components/external-link";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { isArticle } from "@/utils/type-guards";
@@ -44,11 +43,25 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
           <span className="text-navy-deep">{article.title}</span>
         </nav>
 
+        {article.image ? (
+          // eslint-disable-next-line @next/next/no-img-element -- article hero image, no optimization needed
+          <img src={article.image} alt={article.title} loading="lazy" className="mb-6 aspect-video w-full border border-line bg-mist object-cover" />
+        ) : (
+          <div className="mb-6 flex aspect-video items-center justify-center border border-line bg-mist">
+            <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
+          </div>
+        )}
+
         <h1 className="mt-6 max-w-reading text-step-3 font-bold text-navy-deep">
           {article.title}
         </h1>
 
         <Meta date={article.date} category={article.category} className="mt-4" />
+        {article.author && (
+          <p className="mt-1 text-step--1 text-ink-soft">
+            Oleh <Placeholder>{article.author}</Placeholder>
+          </p>
+        )}
 
         <p className="mt-6 max-w-reading text-step-1 leading-[1.7] text-ink">
           {article.content ? (
@@ -57,17 +70,6 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
             article.summary
           )}
         </p>
-
-        {article.url && (
-          <div className="mt-10">
-            <ExternalLink
-              href={article.url}
-              className="btn bg-signal text-navy-deep hover:bg-white"
-            >
-              Baca di situs resmi
-            </ExternalLink>
-          </div>
-        )}
 
         <div className="mt-10">
           <Link

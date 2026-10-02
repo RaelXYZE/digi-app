@@ -14,7 +14,9 @@ export function isArticle(x: unknown): x is Article {
     typeof x.category === "string" &&
     typeof x.summary === "string" &&
     (x.url === undefined || typeof x.url === "string") &&
-    (x.content === undefined || typeof x.content === "string")
+    (x.content === undefined || typeof x.content === "string") &&
+    (x.image === undefined || typeof x.image === "string") &&
+    (x.author === undefined || typeof x.author === "string")
   );
 }
 
