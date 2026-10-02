@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/constants/site";
 import beritaData from "@/data/berita.json";
-import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { isArticle } from "@/utils/type-guards";
 import type { Article } from "@/types";
@@ -24,32 +23,22 @@ const articles = (beritaData as unknown[])
 
 function ArticleCard({ article }: { article: Article }) {
   return (
-    <li className="flex flex-col border border-line bg-white p-5 transition-colors hover:border-brand hover:bg-mist">
-      {article.image ? (
-        // eslint-disable-next-line @next/next/no-img-element -- article thumbnail, no optimization needed
-        <img src={article.image} alt={article.title} loading="lazy" className="mb-4 aspect-video w-full shrink-0 border border-line bg-mist object-cover" />
-      ) : (
-        <div className="mb-4 flex aspect-video items-center justify-center border border-line bg-mist">
-          <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
-        </div>
-      )}
-      <h2 className="font-display text-step-1 font-bold text-navy-deep">
-        <Link href={`/publikasi/berita-terbaru/${article.id}`} className="text-navy-deep no-underline hover:text-brand">
-          {article.title}
-        </Link>
-      </h2>
-      <Meta date={article.date} category={article.category} className="mt-2" />
-      {article.author && (
-        <p className="mt-1 text-step--1 text-ink-soft">
-          <Placeholder>{article.author}</Placeholder>
-        </p>
-      )}
-      <p className="mt-2 flex-1 text-ink-soft">{article.summary}</p>
+    <li className="border border-line bg-white transition-colors hover:border-brand hover:bg-mist">
       <Link
         href={`/publikasi/berita-terbaru/${article.id}`}
-        className="mt-3 inline-flex min-h-11 items-center font-semibold text-brand underline underline-offset-4 hover:text-navy-deep"
+        className="block no-underline"
       >
-        Baca selengkapnya
+        {article.image ? (
+          // eslint-disable-next-line @next/next/no-img-element -- article thumbnail, no optimization needed
+          <img src={article.image} alt={article.title} loading="lazy" className="aspect-video w-full border-b border-line bg-mist object-cover" />
+        ) : (
+          <div className="flex aspect-video items-center justify-center border-b border-line bg-mist">
+            <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
+          </div>
+        )}
+        <h2 className="p-5 font-display text-step-1 font-bold text-navy-deep">
+          {article.title}
+        </h2>
       </Link>
     </li>
   );
