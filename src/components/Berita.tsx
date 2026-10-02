@@ -47,7 +47,7 @@ export default function Berita() {
               <Meta date={featured.date} category={featured.category} />
               {featured.author && (
                 <p className="mt-1 text-step--1 text-ink-soft">
-                  Oleh <Placeholder>{featured.author}</Placeholder>
+                  <Placeholder>{featured.author}</Placeholder>
                 </p>
               )}
               <h3 className="mt-4 font-display text-step-3 font-bold leading-tight">

@@ -39,7 +39,7 @@ function ArticleCard({ article }: { article: Article }) {
       <Meta date={article.date} category={article.category} className="mt-2" />
       {article.author && (
         <p className="mt-1 text-step--1 text-ink-soft">
-          Oleh <Placeholder>{article.author}</Placeholder>
+          <Placeholder>{article.author}</Placeholder>
         </p>
       )}
       <p className="mt-2 flex-1 text-ink-soft">{article.summary}</p>

@@ -59,7 +59,7 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
         <Meta date={article.date} category={article.category} className="mt-4" />
         {article.author && (
           <p className="mt-1 text-step--1 text-ink-soft">
-            Oleh <Placeholder>{article.author}</Placeholder>
+            <Placeholder>{article.author}</Placeholder>
           </p>
         )}
 
