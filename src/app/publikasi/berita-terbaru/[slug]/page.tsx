@@ -43,15 +43,6 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
           <span className="text-navy-deep">{article.title}</span>
         </nav>
 
-        {article.image ? (
-          // eslint-disable-next-line @next/next/no-img-element -- article hero image, no optimization needed
-          <img src={article.image} alt={article.title} loading="lazy" className="mb-6 aspect-video w-full border border-line bg-mist object-cover" />
-        ) : (
-          <div className="mb-6 flex aspect-video items-center justify-center border border-line bg-mist">
-            <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
-          </div>
-        )}
-
         <h1 className="mt-6 max-w-reading text-step-3 font-bold text-navy-deep">
           {article.title}
         </h1>
@@ -61,6 +52,15 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
           <p className="mt-1 text-step--1 text-ink-soft">
             <Placeholder>{article.author}</Placeholder>
           </p>
+        )}
+
+        {article.image ? (
+          // eslint-disable-next-line @next/next/no-img-element -- article hero image, no optimization needed
+          <img src={article.image} alt={article.title} loading="lazy" className="mt-6 mb-6 aspect-video w-full border border-line bg-mist object-cover" />
+        ) : (
+          <div className="mt-6 mb-6 flex aspect-video items-center justify-center border border-line bg-mist">
+            <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
+          </div>
         )}
 
         <p className="mt-6 max-w-reading text-step-1 leading-[1.7] text-ink">
