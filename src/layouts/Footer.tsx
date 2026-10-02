@@ -13,7 +13,7 @@ const linkClass =
   "inline-flex min-h-11 items-center text-white underline-offset-4 hover:underline";
 
 const socialIconClass =
-  "inline-flex min-h-11 items-center gap-2 rounded-full text-white/90 transition-colors hover:text-white";
+  "inline-flex min-h-11 items-center text-white/90 transition-colors hover:text-white";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -21,10 +21,54 @@ export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-navy text-white bleed bleed-navy">
       <ParticleBackground id="tsparticles-footer" />
-      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.8fr_1fr_1fr] lg:grid-cols-[1.8fr_1fr_1fr_1fr]">
+      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1fr_1fr_1.6fr] lg:grid-cols-[1fr_1fr_1fr_1.6fr]">
         <div>
           <BrandLockup variant="footer" theme="dark" />
-          <address className="mt-4 max-w-reading not-italic text-white/90">
+          <ul className="mt-4 flex gap-4">
+            {SITE.social.map((s) => (
+              <li key={s.id}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className={socialIconClass}
+                >
+                  <SocialIcon platform={s.id} className="h-6 w-6" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <nav aria-label="Tautan cepat">
+          <h2 className="font-display text-step-1 font-bold">Tautan cepat</h2>
+          <ul className="mt-3">
+            {QUICK_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={linkClass}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="font-display text-step-1 font-bold">Jam Pelayanan</h2>
+          <dl className="mt-3 space-y-3">
+            {SERVICE_HOURS.map((h) => (
+              <div key={h.day}>
+                <dt className="font-semibold text-white">{h.day}</dt>
+                <dd className="text-white/85">{h.time}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <nav aria-label="Kontak">
+          <h2 className="font-display text-step-1 font-bold">Kontak</h2>
+          <address className="mt-3 max-w-reading not-italic text-white/90">
             <p>
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
@@ -53,51 +97,6 @@ export default function Footer() {
               </a>
             </p>
           </address>
-        </div>
-
-        <div>
-          <h2 className="font-display text-step-1 font-bold">Jam Pelayanan</h2>
-          <dl className="mt-3 space-y-3">
-            {SERVICE_HOURS.map((h) => (
-              <div key={h.day}>
-                <dt className="font-semibold text-white">{h.day}</dt>
-                <dd className="text-white/85">{h.time}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <nav aria-label="Tautan cepat">
-          <h2 className="font-display text-step-1 font-bold">Tautan cepat</h2>
-          <ul className="mt-3">
-            {QUICK_LINKS.map((l) => (
-              <li key={l.href}>
-                <Link href={l.href} className={linkClass}>
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <nav aria-label="Media sosial resmi">
-          <h2 className="font-display text-step-1 font-bold">Media sosial resmi</h2>
-          <ul className="mt-3">
-            {SITE.social.map((s) => (
-              <li key={s.id}>
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  className={socialIconClass}
-                >
-                  <SocialIcon platform={s.id} className="h-6 w-6" />
-                  <span className="font-semibold">{s.name}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
         </nav>
       </div>
 
