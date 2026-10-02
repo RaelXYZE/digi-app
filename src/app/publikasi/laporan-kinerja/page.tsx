@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
 import laporanKinerjaData from "@/data/laporan-kinerja.json";
 import { PublicationCard } from "@/components/PublicationCard";
+import { Pagination } from "@/components/Pagination";
 import { isArticle } from "@/utils/type-guards";
+import { paginate } from "@/utils/paginate";
+
+const PAGE_SIZE = 6;
 
 export const metadata: Metadata = {
   title: `Laporan Kinerja | ${SITE.shortName}`,
@@ -17,7 +21,18 @@ const reports = (laporanKinerjaData as unknown[])
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date));
 
-export default function LaporanKinerjaPage() {
+export default async function LaporanKinerjaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const { items: pageItems, safePage, totalPages } = paginate(
+    reports,
+    pageParam,
+    PAGE_SIZE,
+  );
+
   return (
     <section className="section bg-paper bleed bleed-paper">
       <div className="wrap">
@@ -27,17 +42,24 @@ export default function LaporanKinerjaPage() {
             Tidak ada laporan kinerja yang ditampilkan saat ini.
           </p>
         ) : (
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {reports.map((item) => (
-              <PublicationCard
-                key={item.id}
-                title={item.title}
-                date={item.date}
-                category={item.category}
-                summary={item.summary}
-              />
-            ))}
-          </ul>
+          <>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {pageItems.map((item) => (
+                <PublicationCard
+                  key={item.id}
+                  title={item.title}
+                  date={item.date}
+                  category={item.category}
+                  summary={item.summary}
+                />
+              ))}
+            </ul>
+            <Pagination
+              basePath="/publikasi/laporan-kinerja"
+              safePage={safePage}
+              totalPages={totalPages}
+            />
+          </>
         )}
       </div>
     </section>

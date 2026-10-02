@@ -3,7 +3,9 @@ import Link from "next/link";
 import { SITE } from "@/constants/site";
 import beritaData from "@/data/berita.json";
 import { Placeholder } from "@/components/Placeholder";
+import { Pagination } from "@/components/Pagination";
 import { isArticle } from "@/utils/type-guards";
+import { paginate } from "@/utils/paginate";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -52,13 +54,10 @@ export default async function BeritaTerbaruPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, Number(pageParam) || 1);
-
-  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
-  const safePage = Math.min(currentPage, totalPages);
-  const paginatedArticles = articles.slice(
-    (safePage - 1) * PAGE_SIZE,
-    safePage * PAGE_SIZE,
+  const { items: paginatedArticles, safePage, totalPages } = paginate(
+    articles,
+    pageParam,
+    PAGE_SIZE,
   );
 
   return (
@@ -76,29 +75,11 @@ export default async function BeritaTerbaruPage({
                 <ArticleCard key={article.id} article={article} />
               ))}
             </ul>
-            {totalPages > 1 && (
-              <nav aria-label="Navigasi halaman" className="mt-10 flex items-center justify-center gap-4">
-                {safePage > 1 && (
-                  <Link
-                    href={`/publikasi/berita-terbaru?page=${safePage - 1}`}
-                    className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
-                  >
-                    Sebelumnya
-                  </Link>
-                )}
-                <span className="text-ink-soft">
-                  Halaman {safePage} dari {totalPages}
-                </span>
-                {safePage < totalPages && (
-                  <Link
-                    href={`/publikasi/berita-terbaru?page=${safePage + 1}`}
-                    className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
-                  >
-                    Berikutnya
-                  </Link>
-                )}
-              </nav>
-            )}
+            <Pagination
+              basePath="/publikasi/berita-terbaru"
+              safePage={safePage}
+              totalPages={totalPages}
+            />
           </>
         )}
       </div>
