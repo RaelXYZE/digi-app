@@ -127,6 +127,11 @@
     --max-w-wrap: 89rem;
   }
 
+  /* pengaturan footer lebar */
+  .wrap-footer {
+    --max-w-wrap: 89rem;
+  }
+
   /* The only source of vertical padding between sections */
   .section {
     padding-block: var(--space-section);
