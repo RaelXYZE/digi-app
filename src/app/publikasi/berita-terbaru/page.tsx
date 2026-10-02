@@ -7,6 +7,8 @@ import { Placeholder } from "@/components/Placeholder";
 import { isArticle } from "@/utils/type-guards";
 import type { Article } from "@/types";
 
+const PAGE_SIZE = 6;
+
 export const metadata: Metadata = {
   title: `Berita Terbaru | ${SITE.shortName}`,
   description:
@@ -53,7 +55,21 @@ function ArticleCard({ article }: { article: Article }) {
   );
 }
 
-export default function BeritaTerbaruPage() {
+export default async function BeritaTerbaruPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const currentPage = Math.max(1, Number(pageParam) || 1);
+
+  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedArticles = articles.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE,
+  );
+
   return (
     <section className="section bg-white bleed bleed-white">
       <div className="wrap">
@@ -63,11 +79,36 @@ export default function BeritaTerbaruPage() {
             Tidak ada berita yang ditampilkan saat ini.
           </p>
         ) : (
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </ul>
+          <>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {paginatedArticles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+            </ul>
+            {totalPages > 1 && (
+              <nav aria-label="Navigasi halaman" className="mt-10 flex items-center justify-center gap-4">
+                {safePage > 1 && (
+                  <Link
+                    href={`/publikasi/berita-terbaru?page=${safePage - 1}`}
+                    className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
+                  >
+                    Sebelumnya
+                  </Link>
+                )}
+                <span className="text-ink-soft">
+                  Halaman {safePage} dari {totalPages}
+                </span>
+                {safePage < totalPages && (
+                  <Link
+                    href={`/publikasi/berita-terbaru?page=${safePage + 1}`}
+                    className="btn border border-brand bg-white text-brand hover:bg-brand hover:text-white"
+                  >
+                    Berikutnya
+                  </Link>
+                )}
+              </nav>
+            )}
+          </>
         )}
       </div>
     </section>
