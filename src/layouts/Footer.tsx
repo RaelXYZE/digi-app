@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-navy text-white bleed bleed-navy">
       <ParticleBackground id="tsparticles-footer" />
-      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr] lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="wrap relative grid gap-10 py-14 md:grid-cols-[1.8fr_1fr_1fr] lg:grid-cols-[1.8fr_1fr_1fr_1fr]">
         <div>
           <BrandLockup variant="footer" theme="dark" />
           <address className="mt-4 max-w-reading not-italic text-white/90">
