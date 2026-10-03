@@ -32,6 +32,7 @@ export const NAV: readonly NavItem[] = [
     children: [
       { id: "profil-balmon", label: "Profil Balmon Jayapura", href: "/profil" },
       { id: "daftar-pegawai", label: "Daftar Pegawai", href: "/profil/daftar-pegawai" },
+      { id: "wilayah-kerja", label: "Wilayah Kerja", href: "/profil/wilayah-kerja" },
     ],
   },
   {
@@ -64,6 +65,7 @@ export const SERVICE_HOURS: { day: string; time: string }[] = [
 // Update together with the pages' robots flags.
 export const NOINDEX_ROUTES: readonly string[] = [
   "/profil/daftar-pegawai",
+  "/profil/wilayah-kerja",
   "/publikasi/berita-terbaru",
   "/publikasi/pengumuman",
   "/publikasi/galeri",
