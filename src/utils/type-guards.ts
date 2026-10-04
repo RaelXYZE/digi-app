@@ -52,6 +52,7 @@ export function isHomeStat(x: unknown): x is HomeStat {
     typeof x.value === "number" &&
     Number.isFinite(x.value) &&
     x.value >= 0 &&
+    (x.suffix === undefined || typeof x.suffix === "string") &&
     (x.unit === undefined || typeof x.unit === "string")
   );
 }

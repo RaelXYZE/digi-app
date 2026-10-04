@@ -1,8 +1,90 @@
 import statsData from "@/data/home-stats.json";
 import { isHomeStat } from "@/utils/type-guards";
 import ParticleBackground from "@/components/tsParticles";
+import { StatCard } from "@/components/StatCard";
 
 const stats = (statsData as unknown[]).filter(isHomeStat);
+
+function StatIcon({ id }: { id: string }) {
+  switch (id) {
+    case "wilayah-kerja":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    case "frekuensi-termonitor":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M2 12h3l3-9 4 18 3-9h3" />
+          <path d="M20 12h2" />
+        </svg>
+      );
+    case "broadcast-diukur":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 20v-8" />
+          <circle cx="12" cy="8" r="2" />
+          <path d="M4.93 19.07a10 10 0 0 1 0-14.14" />
+          <path d="M7.76 16.24a6 6 0 0 1 0-8.48" />
+          <path d="M16.24 7.76a6 6 0 0 1 0 8.48" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+      );
+    case "peserta-unar":
+    default:
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <circle cx="12" cy="14" r="3" />
+        </svg>
+      );
+  }
+}
 
 const LOGOS = [
   { src: "/LogoKomdigi.png", alt: "Kementerian Komunikasi dan Digital", width: 113, height: 36 },
@@ -77,23 +159,15 @@ export default function Hero() {
         </div>
 
         {stats.length > 0 && (
-          <div className="fade-in fade-in-delayed bg-navy-deep/60 p-6 backdrop-blur-sm">
-            <h2 className="font-display text-step-1 font-bold">Balmon dalam angka</h2>
-            <dl className="mt-4 grid grid-cols-2 items-start gap-x-4 gap-y-5 sm:gap-x-5">
-              {stats.map((item) => (
-                <div key={item.id} className="flex flex-col-reverse border-t border-white/20 pt-3">
-                  <dt className="mt-1 text-step--1 text-white/90">{item.label}</dt>
-                  <dd className="font-display text-step-2 font-bold leading-none text-signal sm:text-step-3">
-                    {item.value.toLocaleString("id-ID")}
-                    {item.unit && (
-                      <span className="ml-1 font-sans text-step--2 font-normal text-white/80">
-                        {item.unit}
-                      </span>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+          <div className="fade-in fade-in-delayed grid grid-cols-2 gap-4">
+            {stats.map((item, i) => (
+              <StatCard
+                key={item.id}
+                stat={item}
+                icon={<StatIcon id={item.id} />}
+                featured={i === 0}
+              />
+            ))}
           </div>
         )}
       </div>

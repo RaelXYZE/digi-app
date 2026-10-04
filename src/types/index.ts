@@ -49,5 +49,6 @@ export type HomeStat = {
   id: string;
   label: string;
   value: number;
+  suffix?: string;
   unit?: string;
 };
