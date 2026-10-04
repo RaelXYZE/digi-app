@@ -149,8 +149,5 @@ export const LAYANAN: Service[] = [
   },
 ];
 
-// Quick links on the home page (3-4 most commonly searched services).
-export const QUICK_LINK_IDS = ["aduan-konten", "cek-rekening", "perizinan", "cek-hoaks"] as const;
-
 // Featured services on the home page preview (3-4 most relevant).
 export const FEATURED_SERVICE_IDS = ["perizinan", "aduan-konten", "cek-rekening", "ppid"] as const;

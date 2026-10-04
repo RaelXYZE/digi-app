@@ -4,7 +4,7 @@ import type { SocialPlatform } from "@/types";
 
 export const SITE = {
   name: "Balai Monitor Spektrum Frekuensi Radio dan Infrastruktur Digital Kelas II Jayapura",
-  shortName: "Balai Monitor SFR & Infrastruktur Digital Kelas II Jayapura",
+  shortName: "Balai Monitor SFR&ID Kelas II Jayapura",
   fullName: "Kementerian Komunikasi dan Digital",
   officialName: "Balai Monitoring Spektrum Frekuensi Radio Dan Infrastruktur Digital Kelas II Jayapura",
   description:

@@ -44,3 +44,10 @@ export type Employee = {
   name: string;
   position: string;
 };
+
+export type HomeStat = {
+  id: string;
+  label: string;
+  value: number;
+  unit?: string;
+};

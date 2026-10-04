@@ -1,4 +1,4 @@
-import type { Article, GalleryItem, Employee } from "@/types";
+import type { Article, GalleryItem, Employee, HomeStat } from "@/types";
 
 function isStringRecord(x: unknown): x is Record<string, unknown> {
   return typeof x === "object" && x !== null;
@@ -38,5 +38,20 @@ export function isEmployee(x: unknown): x is Employee {
     typeof x.id === "string" &&
     typeof x.name === "string" &&
     typeof x.position === "string"
+  );
+}
+
+/** Runtime guard for HomeStat JSON. */
+export function isHomeStat(x: unknown): x is HomeStat {
+  if (!isStringRecord(x)) return false;
+  return (
+    typeof x.id === "string" &&
+    x.id.length > 0 &&
+    typeof x.label === "string" &&
+    x.label.length > 0 &&
+    typeof x.value === "number" &&
+    Number.isFinite(x.value) &&
+    x.value >= 0 &&
+    (x.unit === undefined || typeof x.unit === "string")
   );
 }

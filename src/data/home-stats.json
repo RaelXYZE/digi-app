@@ -1,0 +1,6 @@
+[
+  { "id": "wilayah-kerja", "label": "Wilayah Kerja", "value": 24, "unit": "Kab/Kota" },
+  { "id": "frekuensi-termonitor", "label": "Frekuensi Termonitor", "value": 1107 },
+  { "id": "broadcast-diukur", "label": "Broadcast Diukur", "value": 44 },
+  { "id": "peserta-unar", "label": "Peserta UNAR", "value": 174 }
+]

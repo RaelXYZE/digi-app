@@ -1,10 +1,8 @@
-import { LAYANAN, QUICK_LINK_IDS } from "@/constants/layanan";
-import { ExternalLink } from "@/components/external-link";
+import statsData from "@/data/home-stats.json";
+import { isHomeStat } from "@/utils/type-guards";
 import ParticleBackground from "@/components/tsParticles";
 
-const quickLinks = QUICK_LINK_IDS.map((id) => LAYANAN.find((l) => l.id === id)).filter(
-  (l): l is NonNullable<typeof l> => Boolean(l),
-);
+const stats = (statsData as unknown[]).filter(isHomeStat);
 
 const LOGOS = [
   { src: "/LogoKomdigi.png", alt: "Kementerian Komunikasi dan Digital", width: 113, height: 36 },
@@ -78,24 +76,26 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="fade-in fade-in-delayed bg-navy-deep/60 p-6 backdrop-blur-sm">
-          <h2 className="font-display text-step-1 font-bold">Paling sering dicari</h2>
-          <ul className="mt-2 divide-y divide-white/20">
-            {quickLinks.map((l) => (
-              <li key={l.id}>
-                <ExternalLink
-                  href={l.url}
-                  className="group flex min-h-11 flex-col justify-center py-3 no-underline"
-                >
-                  <span className="font-semibold text-white group-hover:underline">
-                    {l.action}
-                  </span>
-                  <span className="block text-step--1 text-white/90">{l.name}</span>
-                </ExternalLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {stats.length > 0 && (
+          <div className="fade-in fade-in-delayed bg-navy-deep/60 p-6 backdrop-blur-sm">
+            <h2 className="font-display text-step-1 font-bold">Balmon dalam angka</h2>
+            <dl className="mt-4 grid grid-cols-2 items-start gap-x-4 gap-y-5 sm:gap-x-5">
+              {stats.map((item) => (
+                <div key={item.id} className="flex flex-col-reverse border-t border-white/20 pt-3">
+                  <dt className="mt-1 text-step--1 text-white/90">{item.label}</dt>
+                  <dd className="font-display text-step-2 font-bold leading-none text-signal sm:text-step-3">
+                    {item.value.toLocaleString("id-ID")}
+                    {item.unit && (
+                      <span className="ml-1 font-sans text-step--2 font-normal text-white/80">
+                        {item.unit}
+                      </span>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
       </div>
 
       <div className="wrap relative mt-10">
