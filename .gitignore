@@ -27,6 +27,14 @@ graphify-out/
 AGENTS.md
 CLAUDE.md
 
+#docs
+ARCHITECTURE.MD
+BACKEND_INTEGRATION.md
+COMPONENTS.md
+FRONTEND_CONVENTIONS.md
+README.md
+ROUTES_AND_DATA.md
+
 # misc
 .DS_Store
 *.pem
