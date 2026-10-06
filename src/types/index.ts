@@ -12,6 +12,8 @@ export type Article = {
   image?: string;
   /** Name of the writer/editor who uploaded the article. */
   author?: string;
+  /** Direct link to the document (e.g. PDF): site-relative "/..." or https URL. */
+  fileUrl?: string;
 };
 
 export type ServiceGroup = "utama" | "pengaduan" | "informasi";

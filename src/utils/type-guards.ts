@@ -16,7 +16,12 @@ export function isArticle(x: unknown): x is Article {
     (x.url === undefined || typeof x.url === "string") &&
     (x.content === undefined || typeof x.content === "string") &&
     (x.image === undefined || typeof x.image === "string") &&
-    (x.author === undefined || typeof x.author === "string")
+    (x.author === undefined || typeof x.author === "string") &&
+    (x.fileUrl === undefined ||
+      (typeof x.fileUrl === "string" &&
+        !/[\\\x00-\x20\x7F]/.test(x.fileUrl) &&
+        ((x.fileUrl.startsWith("/") && !x.fileUrl.startsWith("//")) ||
+          x.fileUrl.startsWith("https://"))))
   );
 }
 
