@@ -45,7 +45,6 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                 </div>
               ))}
             </dl>
-            <p className="mt-2 text-step--2 text-ink-soft">Angka kecamatan, desa/kelurahan, dan stasiun radio adalah data demo.</p>
           </div>
 
           <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start">
@@ -137,9 +136,6 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                 <>
                   <h3 className="font-display text-step-1 font-bold text-navy-deep">
                     {selected.name}
-                    <span className="ml-2 rounded-full border border-line px-2 py-0.5 align-middle font-sans text-step--2 font-normal text-ink-soft">
-                      Data demo
-                    </span>
                   </h3>
                   <p className="mt-1 flex items-center gap-1.5 text-step--1 text-ink-soft">
                     <span className={`inline-block size-2.5 rounded-full ${provinsiOf(selected.province).dot}`} />

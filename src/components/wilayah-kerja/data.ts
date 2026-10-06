@@ -1,7 +1,7 @@
 import type { Kabupaten } from "./types";
 
-// DEMO DATA: kecamatan, desa, and stasiun are placeholder numbers.
-// Replace with real figures (or load from your backend and pass via the `data` prop).
+// PLACEHOLDER: angka kecamatan/desa/stasiun per kabupaten (dan total 499 kecamatan / 4.807 desa)
+// harus diganti dengan data API/database — jangan dianggap angka resmi.
 export const KABUPATEN: Kabupaten[] = [
   { id: "kota-jayapura", name: "Kota Jayapura", province: "Papua", capital: "Jayapura", kecamatan: 29, desa: 348, stasiun: 40 },
   { id: "jayapura", name: "Kab. Jayapura", province: "Papua", capital: "Sentani", kecamatan: 16, desa: 112, stasiun: 13 },
