@@ -101,7 +101,7 @@ export default function Footer() {
       </div>
 
       <div className="relative border-t border-white/20">
-        <p className="wrap wrap-footer relative py-5 text-step--1 text-white/85">
+        <p className="wrap wrap-footer relative pt-5 pb-20 text-step--1 text-white/85">
           © {year} {SITE.officialName}. Hak cipta dilindungi undang-undang.
         </p>
       </div>

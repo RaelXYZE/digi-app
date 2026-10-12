@@ -1,26 +1,74 @@
-import pegawaiData from "@/data/pegawai.json";
-import { isEmployee } from "@/utils/type-guards";
 import { Placeholder } from "@/components/Placeholder";
+import { EmptyState } from "@/components/EmptyState";
+import { getPegawai } from "@/utils/api";
+import type { Employee } from "@/types";
 
-const employees = (pegawaiData as unknown[]).filter(isEmployee);
+function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
 
-export default function DaftarPegawai() {
+function Avatar({ employee }: { employee: Employee }) {
+  if (employee.image) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- pegawai foto, no optimization needed
+      <img
+        src={employee.image}
+        alt={`Foto ${employee.name}`}
+        loading="lazy"
+        width={56}
+        height={56}
+        className="h-14 w-14 rounded-full border border-line bg-mist object-cover"
+      />
+    );
+  }
+  return (
+    <div
+      aria-hidden="true"
+      className="flex h-14 w-14 items-center justify-center rounded-full bg-mist font-display text-step-0 font-bold text-navy-deep"
+    >
+      {initials(employee.name)}
+    </div>
+  );
+}
+
+export default async function DaftarPegawai() {
+  const employees = await getPegawai().catch(() => null);
+
   return (
     <section className="section bg-white bleed bleed-white">
       <div className="wrap">
         <h1 className="text-step-3 font-bold text-navy-deep">Daftar Pegawai</h1>
-        {employees.length === 0 ? (
-          <p className="mt-8 text-ink-soft">Belum ada data pegawai yang ditampilkan.</p>
+        {employees === null ? (
+          <EmptyState
+            variant="error"
+            message="Daftar pegawai sedang tidak dapat dimuat dari server. Silakan coba lagi sebentar."
+            actionHref="/profil/daftar-pegawai"
+            actionLabel="Coba muat ulang"
+          />
+        ) : employees.length === 0 ? (
+          <EmptyState
+            variant="empty"
+            message="Belum ada data pegawai yang ditampilkan."
+          />
         ) : (
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {employees.map((e) => (
-              <li key={e.id} className="border border-line bg-white p-5">
-                <h2 className="font-display text-step-1 font-bold text-navy-deep">
-                  <Placeholder>{e.name}</Placeholder>
-                </h2>
-                <p className="mt-1 text-ink-soft">
-                  <Placeholder>{e.position}</Placeholder>
-                </p>
+              <li key={e.id} className="flex gap-4 border border-line bg-white p-5">
+                <Avatar employee={e} />
+                <div>
+                  <h2 className="font-display text-step-1 font-bold text-navy-deep">
+                    <Placeholder>{e.name}</Placeholder>
+                  </h2>
+                  <p className="mt-1 text-ink-soft">
+                    <Placeholder>{e.position}</Placeholder>
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

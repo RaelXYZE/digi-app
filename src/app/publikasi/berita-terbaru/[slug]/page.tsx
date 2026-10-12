@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import beritaData from "@/data/berita.json";
 import { SITE } from "@/constants/site";
+import { getBeritaItem } from "@/utils/api";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
-import { isArticle } from "@/utils/type-guards";
+import type { Article } from "@/types";
 
 type Params = Promise<{ slug: string }>;
 
-const articles = (beritaData as unknown[]).filter(isArticle);
-
-export function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.id }));
-}
-
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const article = articles.find((a) => a.id === slug);
+  const article = await getBeritaItem(slug).catch(() => null);
   if (!article) return { title: "Berita tidak ditemukan" };
   return {
     title: `${article.title} | ${SITE.shortName}`,
@@ -29,7 +23,26 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function ArticleDetailPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const article = articles.find((a) => a.id === slug);
+  let article: Article | null = null;
+  let failed = false;
+  try {
+    article = await getBeritaItem(slug);
+  } catch {
+    failed = true;
+  }
+  if (failed) {
+    return (
+      <section className="section bg-white bleed bleed-white">
+        <div className="wrap">
+          <h1 className="text-step-3 font-bold text-navy-deep">Berita</h1>
+          <p className="mt-8 text-ink-soft">
+            Berita sedang tidak dapat dimuat dari server. Silakan coba lagi
+            sebentar.
+          </p>
+        </div>
+      </section>
+    );
+  }
   if (!article) notFound();
 
   return (

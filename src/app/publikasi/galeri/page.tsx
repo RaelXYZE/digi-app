@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
-import galeriData from "@/data/galeri.json";
+import { getGaleri } from "@/utils/api";
 import { PublicationCard } from "@/components/PublicationCard";
 import { Pagination } from "@/components/Pagination";
-import { isGalleryItem } from "@/utils/type-guards";
 import { paginate } from "@/utils/paginate";
+import { EmptyState } from "@/components/EmptyState";
 
 const PAGE_SIZE = 6;
 
@@ -16,17 +16,33 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const items = (galeriData as unknown[])
-  .filter(isGalleryItem)
-  .slice()
-  .sort((a, b) => b.date.localeCompare(a.date));
-
 export default async function GaleriPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page: pageParam } = await searchParams;
+  const data = await getGaleri().catch(() => null);
+
+  if (data === null) {
+    return (
+      <section className="section bg-white bleed bleed-white">
+        <div className="wrap">
+          <h1 className="text-step-3 font-bold text-navy-deep">Galeri</h1>
+          <EmptyState
+            variant="error"
+            message="Galeri sedang tidak dapat dimuat dari server. Silakan coba lagi sebentar."
+            actionHref="/publikasi/galeri"
+            actionLabel="Coba muat ulang"
+          />
+        </div>
+      </section>
+    );
+  }
+
+  const items = data
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
   const { items: pageItems, safePage, totalPages } = paginate(
     items,
     pageParam,
@@ -38,9 +54,10 @@ export default async function GaleriPage({
       <div className="wrap">
         <h1 className="text-step-3 font-bold text-navy-deep">Galeri</h1>
         {items.length === 0 ? (
-          <p className="mt-8 text-ink-soft">
-            Tidak ada dokumentasi kegiatan yang ditampilkan saat ini.
-          </p>
+          <EmptyState
+            variant="empty"
+            message="Tidak ada dokumentasi kegiatan yang ditampilkan saat ini."
+          />
         ) : (
           <>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

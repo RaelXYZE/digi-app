@@ -45,6 +45,8 @@ export type Employee = {
   id: string;
   name: string;
   position: string;
+  /** Path under /public or https URL, e.g. "/Pegawai/foto-1.jpg". */
+  image?: string;
 };
 
 export type HomeStat = {

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
-import laporanKinerjaData from "@/data/laporan-kinerja.json";
+import { getLaporanKinerja } from "@/utils/api";
 import { ExternalLink } from "@/components/external-link";
 import { Pagination } from "@/components/Pagination";
 import { formatDate } from "@/utils/format-date";
-import { isArticle } from "@/utils/type-guards";
 import { paginate } from "@/utils/paginate";
+import { EmptyState } from "@/components/EmptyState";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/publikasi/laporan-kinerja" },
   robots: { index: false, follow: true },
 };
-
-const reports = (laporanKinerjaData as unknown[])
-  .filter(isArticle)
-  .slice()
-  .sort((a, b) => b.date.localeCompare(a.date));
 
 function CoverFallback() {
   return (
@@ -48,7 +43,7 @@ function CoverFallback() {
 
 function ReportCard({ report }: { report: Article }) {
   return (
-    <li className="relative flex min-h-11 border border-line bg-white transition-colors hover:border-brand hover:bg-mist">
+    <li className={`relative flex min-h-11 border border-line bg-white transition-colors hover:border-brand hover:bg-mist${report.fileUrl ? " card-hover" : ""}`}>
       {report.image ? (
         // eslint-disable-next-line @next/next/no-img-element -- report cover thumbnail, no optimization needed
         <img
@@ -87,6 +82,27 @@ export default async function LaporanKinerjaPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page: pageParam } = await searchParams;
+  const data = await getLaporanKinerja().catch(() => null);
+
+  if (data === null) {
+    return (
+      <section className="section bg-paper bleed bleed-paper">
+        <div className="wrap">
+          <h1 className="text-step-3 font-bold text-navy-deep">Laporan Kinerja</h1>
+          <EmptyState
+            variant="error"
+            message="Laporan kinerja sedang tidak dapat dimuat dari server. Silakan coba lagi sebentar."
+            actionHref="/publikasi/laporan-kinerja"
+            actionLabel="Coba muat ulang"
+          />
+        </div>
+      </section>
+    );
+  }
+
+  const reports = data
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
   const { items: pageItems, safePage, totalPages } = paginate(
     reports,
     pageParam,
@@ -98,12 +114,13 @@ export default async function LaporanKinerjaPage({
       <div className="wrap">
         <h1 className="text-step-3 font-bold text-navy-deep">Laporan Kinerja</h1>
         {reports.length === 0 ? (
-          <p className="mt-8 text-ink-soft">
-            Tidak ada laporan kinerja yang ditampilkan saat ini.
-          </p>
+          <EmptyState
+            variant="empty"
+            message="Tidak ada laporan kinerja yang ditampilkan saat ini."
+          />
         ) : (
           <>
-            <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {pageItems.map((item) => (
                 <ReportCard key={item.id} report={item} />
               ))}

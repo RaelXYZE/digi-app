@@ -1,16 +1,14 @@
-import beritaData from "@/data/berita.json";
 import Link from "next/link";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
-import { isArticle } from "@/utils/type-guards";
+import { getBerita } from "@/utils/api";
 
-const articles = (beritaData as unknown[])
-  .filter(isArticle)
-  .slice()
-  .sort((a, b) => b.date.localeCompare(a.date))
-  .slice(0, 6);
-
-export default function Berita() {
+export default async function Berita() {
+  const berita = await getBerita().catch(() => null);
+  const articles = (berita ?? [])
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 6);
   const [featured, ...rest] = articles;
 
   return (
@@ -22,7 +20,11 @@ export default function Berita() {
 
         {!featured ? (
           <div className="mt-8 border border-line bg-mist p-6">
-            <p className="font-semibold text-navy-deep">Belum ada berita yang ditampilkan.</p>
+            <p className="font-semibold text-navy-deep">
+              {berita === null
+                ? "Berita sedang tidak dapat dimuat dari server."
+                : "Belum ada berita yang ditampilkan."}
+            </p>
             <p className="mt-1 text-ink-soft">
               Anda tetap bisa membaca seluruh berita di halaman Berita Terbaru.
             </p>

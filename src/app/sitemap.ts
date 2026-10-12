@@ -2,12 +2,11 @@ import type { MetadataRoute } from "next";
 import { LAYANAN } from "@/constants/layanan";
 import { NOINDEX_ROUTES } from "@/constants/site";
 import { isPlaceholderService } from "@/utils/placeholder";
-import beritaData from "@/data/berita.json";
-import { isArticle } from "@/utils/type-guards";
+import { getBerita } from "@/utils/api";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/layanan",
@@ -32,8 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/layanan/${s.id}`,
       lastModified,
     })),
-    ...beritaData
-      .filter(isArticle)
+    ...(
+      (await getBerita().catch(() => null)) ?? []
+    )
       .filter((a) => !a.content?.startsWith("[ISI"))
       .map((a) => ({
         url: `${siteUrl}/publikasi/berita-terbaru/${a.id}`,

@@ -72,7 +72,7 @@ export function PublicationCard({
 
   return (
     <li>
-      <ExternalLink href={url} className={cardClass}>
+      <ExternalLink href={url} className={`${cardClass} card-hover`}>
         <Content
           title={title}
           date={date}

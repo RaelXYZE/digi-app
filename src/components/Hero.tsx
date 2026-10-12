@@ -1,9 +1,6 @@
-import statsData from "@/data/home-stats.json";
-import { isHomeStat } from "@/utils/type-guards";
 import ParticleBackground from "@/components/tsParticles";
 import { StatCard } from "@/components/StatCard";
-
-const stats = (statsData as unknown[]).filter(isHomeStat);
+import { getStatistik } from "@/utils/api";
 
 function StatIcon({ id }: { id: string }) {
   switch (id) {
@@ -94,7 +91,9 @@ const LOGOS = [
   { src: "/logoSGratifikasi.png", alt: "Stop Gratifikasi", width: 60, height: 36 },
 ] as const;
 
-export default function Hero() {
+export default async function Hero() {
+  const stats = await getStatistik().catch(() => null);
+
   return (
     <section
       id="beranda"
@@ -158,17 +157,23 @@ export default function Hero() {
           </div>
         </div>
 
-        {stats.length > 0 && (
-          <div className="fade-in fade-in-delayed grid grid-cols-2 gap-4">
-            {stats.map((item, i) => (
-              <StatCard
-                key={item.id}
-                stat={item}
-                icon={<StatIcon id={item.id} />}
-                featured={i === 0}
-              />
-            ))}
+        {stats === null ? (
+          <div className="fade-in text-step--1 text-white/60">
+            Statistik sedang tidak dapat dimuat.
           </div>
+        ) : (
+          stats.length > 0 && (
+            <div className="fade-in fade-in-delayed grid grid-cols-2 gap-4">
+              {stats.map((item, i) => (
+                <StatCard
+                  key={item.id}
+                  stat={item}
+                  icon={<StatIcon id={item.id} />}
+                  featured={i === 0}
+                />
+              ))}
+            </div>
+          )
         )}
       </div>
 

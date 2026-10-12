@@ -42,7 +42,8 @@ export function isEmployee(x: unknown): x is Employee {
   return (
     typeof x.id === "string" &&
     typeof x.name === "string" &&
-    typeof x.position === "string"
+    typeof x.position === "string" &&
+    (x.image === undefined || typeof x.image === "string")
   );
 }
 

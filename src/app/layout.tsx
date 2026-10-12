@@ -5,6 +5,7 @@ import { SITE } from "@/constants/site";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/layouts/Header";
 import Footer from "@/layouts/Footer";
+import { BackToTop } from "@/components/BackToTop";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = `${SITE.name}: ${SITE.fullName}`;
@@ -67,6 +68,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="id" data-scroll-behavior="smooth">
         <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[100] focus:flex focus:min-h-11 focus:items-center focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus:no-underline focus-visible:[outline-color:var(--color-signal)]"
+        >
+          Lewati ke konten utama
+        </a>
         <script
           type="application/ld+json"
           nonce={nonce}
@@ -78,6 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
         </main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ import { ExternalLink } from "@/components/external-link";
 
 function ServiceCard({ s }: { s: ServiceType }) {
   return (
-    <li className="flex flex-col border border-line bg-white p-5 transition-colors hover:border-brand hover:bg-mist">
+    <li className="flex flex-col border border-line bg-white p-5 transition-colors hover:border-brand hover:bg-mist card-hover">
       <h3 className="font-display text-step-1 font-bold text-navy-deep">
         <Link href={`/layanan/${s.id}`} className="text-navy-deep no-underline hover:text-brand">
           {s.name}

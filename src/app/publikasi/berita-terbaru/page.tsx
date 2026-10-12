@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/constants/site";
-import beritaData from "@/data/berita.json";
+import { getBerita } from "@/utils/api";
 import { Placeholder } from "@/components/Placeholder";
 import { Pagination } from "@/components/Pagination";
-import { isArticle } from "@/utils/type-guards";
 import { paginate } from "@/utils/paginate";
+import { EmptyState } from "@/components/EmptyState";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -18,14 +18,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const articles = (beritaData as unknown[])
-  .filter(isArticle)
-  .slice()
-  .sort((a, b) => b.date.localeCompare(a.date));
-
 function ArticleCard({ article }: { article: Article }) {
   return (
-    <li className="border border-line bg-white transition-colors hover:border-brand hover:bg-mist">
+    <li className="border border-line bg-white transition-colors hover:border-brand hover:bg-mist card-hover">
       <Link
         href={`/publikasi/berita-terbaru/${article.id}`}
         className="block no-underline"
@@ -54,6 +49,27 @@ export default async function BeritaTerbaruPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page: pageParam } = await searchParams;
+  const berita = await getBerita().catch(() => null);
+
+  if (berita === null) {
+    return (
+      <section className="section bg-white bleed bleed-white">
+        <div className="wrap">
+          <h1 className="text-step-3 font-bold text-navy-deep">Berita Terbaru</h1>
+          <EmptyState
+            variant="error"
+            message="Berita sedang tidak dapat dimuat dari server. Silakan coba lagi sebentar."
+            actionHref="/publikasi/berita-terbaru"
+            actionLabel="Coba muat ulang"
+          />
+        </div>
+      </section>
+    );
+  }
+
+  const articles = berita
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
   const { items: paginatedArticles, safePage, totalPages } = paginate(
     articles,
     pageParam,
@@ -65,9 +81,10 @@ export default async function BeritaTerbaruPage({
       <div className="wrap">
         <h1 className="text-step-3 font-bold text-navy-deep">Berita Terbaru</h1>
         {articles.length === 0 ? (
-          <p className="mt-8 text-ink-soft">
-            Tidak ada berita yang ditampilkan saat ini.
-          </p>
+          <EmptyState
+            variant="empty"
+            message="Tidak ada berita yang ditampilkan saat ini."
+          />
         ) : (
           <>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

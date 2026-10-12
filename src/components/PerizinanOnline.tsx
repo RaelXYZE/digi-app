@@ -20,7 +20,7 @@ export default function PerizinanOnline() {
             <li key={item.id}>
               <ExternalLink
                 href={item.url}
-                className="flex h-full min-h-11 items-center border border-line bg-white p-5 text-navy-deep no-underline transition-colors hover:border-brand hover:bg-mist"
+                className="flex h-full min-h-11 items-center border border-line bg-white p-5 text-navy-deep no-underline transition-colors hover:border-brand hover:bg-mist card-hover"
               >
                 <span className="font-display text-step-1 font-bold">{item.name}</span>
               </ExternalLink>

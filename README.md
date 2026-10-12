@@ -1,65 +1,43 @@
-# Homepage Balmon SFRID kelas 2 Jayapura (Next.js)
+# Balmon SFRID Kelas II Jayapura (digi-app)
 
-Halaman tunggal dengan empat bagian: Beranda, Tentang Kami, Layanan, Berita.
-Dibuat mengikuti `AGENTS.md`, dengan isi yang diambil dari hasil scraping beranda komdigi.go.id.
+Situs publik multi-halaman (Next.js App Router) untuk Balai Monitor Spektrum Frekuensi Radio dan Infrastruktur Digital Kelas II Jayapura. Sebagian besar halaman mengambil data dari backend **digi-api** (Django/DRF); sebagian konten (layanan, profil, identitas) masih konstanta di repo.
+
+> Dokumentasi detail — sumber kebenaran — ada di [`docs/`](./docs/README.md). Panduan agent: [`AGENTS.md`](./AGENTS.md).
 
 ## Menjalankan
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+npm run dev        # http://localhost:3000  (backend digi-api harus jalan di :8000 untuk halaman ber-data)
 npm run build && npm start
 ```
 
-Opsional: buat `.env.local` berisi `NEXT_PUBLIC_SITE_URL=https://domain-anda` agar metadata Open Graph memakai domain yang benar.
+Konfigurasi `.env`: lihat `.env.example`. `NEXT_PUBLIC_API_URL` = base URL digi-api (default `http://localhost:8000`); `NEXT_PUBLIC_SITE_URL` untuk metadata/OG/sitemap.
 
 ## Stack
 
-Next.js 16 (App Router, folder `src/`), React 19, TypeScript, Tailwind CSS 4.
-Tanpa dependensi tambahan, tanpa font unduhan, tanpa skrip pihak ketiga.
-`AGENTS.md` menyarankan folder `pages/`; proyek ini memakai `src/app/` (App Router) karena itu default Next.js saat ini. Folder lain (`components`, `layouts`, `constants`, `hooks`, `utils`, `types`, `data`) mengikuti saran tersebut.
+Next.js 16 (App Router, `src/`), React 19, TypeScript (strict), Tailwind CSS 4. Dependensi UI ekstra: `@tsparticles/react` + `@tsparticles/slim` (latar partikel). Tanpa font unduhan, tanpa skrip pihak ketiga.
+
+## Data & integrasi
+
+Satu klien fetch terpusat: `src/utils/api.ts` (`getBerita`, `getBeritaItem`, `getPengumuman`, `getLaporanKinerja`, `getPegawai`, `getStatistik`, `getGaleri`, `getHealth`). Dipanggil dari server component (`revalidate: 60`); hasil disaring guard runtime `src/utils/type-guards.ts`. Peta lengkap & status per entity: [`docs/BACKEND_INTEGRATION.md`](./docs/BACKEND_INTEGRATION.md). Halaman uji koneksi: `/status-api`.
+
+## Masih statis (bukan API)
+
+- Identitas, menu, sosial: `src/constants/site.ts`
+- Layanan & tautan: `src/constants/layanan.ts`, `src/constants/perizinan-online.ts`
+- Konten profil (visi/misi/dll): `src/constants/tentang.ts`
+- Wilayah kerja (peta): `src/components/wilayah-kerja/data.ts` (DEMO)
 
 ## Token desain
 
-Semua ada di `src/app/globals.css` sebagai custom properties, dipetakan ke Tailwind 4 via `@theme inline`.
-
-| Token | Nilai | Fungsi |
-|---|---|---|
-| `--color-navy-deep` | `#021e4e` | Hero |
-| `--color-navy` | `#00336c` | Footer (sama dengan footer situs sumber) |
-| `--color-brand` | `#00458e` | Tautan dan tombol di latar terang |
-| `--color-signal` | `#21ccf1` | Aksi utama di latar gelap (isian saja, bukan teks) |
-| `--color-mist` / `--color-paper` | `#e6effa` / `#f4f7fb` | Latar lembut |
-| `--color-ink` / `--color-ink-soft` | `#0e1b2c` / `#445269` | Teks |
-
-Warna diturunkan dari situs sumber. Kontras semua pasangan teks/latar sudah dihitung (terendah 6,8:1).
-Tipografi: judul memakai serif sistem (Iowan Old Style / Palatino / Georgia), isi memakai sans sistem. Skala `--step--1` sampai `--step-4` bersifat fluid.
-
-## Mengganti data
-
-- Data instansi, menu, dan media sosial: `src/constants/site.ts`
-- Daftar layanan dan tautan cepat Beranda: `src/constants/layanan.ts`
-- Konten Tentang Kami: `src/constants/tentang.ts`
-- Berita: `src/data/berita.json` (terpisah dari markup, siap diganti API). Komponen mengurutkan dari terbaru dan menampilkan maksimal 6.
+Ada di `src/app/globals.css` sebagai custom properties (dipetakan ke Tailwind 4 via `@theme inline`): `--color-navy-deep`, `--color-navy`, `--color-brand`, `--color-signal`, `--color-mist`/`--color-paper`, `--color-ink`. Judul = serif sistem, isi = sans sistem; skala fluid `--step-*`.
 
 ## Placeholder yang harus diisi
 
-Semua placeholder tampil dengan latar kuning dan berawalan `[ISI: ...]`. Cari dengan `grep -rn "\[ISI" src`.
+String berawalan `[ISI: ...]` dirender kuning lewat komponen `Placeholder`. Cari: `grep -rn "\[ISI" src`. Contoh: paragraf profil (`constants/tentang.ts`), konten berita (`content` dari API masih `[ISI: ...]`).
 
-- `src/constants/tentang.ts`: 3 paragraf profil, visi, 3 misi, 4 butir tugas dan fungsi, nama pimpinan
-- `src/data/berita.json`: `ringkasan` untuk enam berita (situs sumber tidak menyertakan ringkasan di beranda)
+## Verifikasi
 
-## Hal yang perlu Anda periksa
+`npx tsc --noEmit` + `npm run lint` (tidak ada test runner). Setelah perubahan struktur besar: `/graphify --update`.
 
-- **Tanggal berita** diambil dari tanggal unggah gambar pada URL sumber (mis. `uploads/2026/9/17/`), bukan dari tanggal terbit resmi. Cocokkan dengan halaman beritanya.
-- **Deskripsi layanan** untuk Sertifikasi, Perizinan, Pengembangan SDM, Instansi pemerintah, Umum, dan Aduan Konten berasal dari situs sumber (diringkas). Deskripsi Aduan Nomor, Cek Rekening, Cek Hoaks, LAPOR!, dan PPID ditulis ulang dari nama layanannya; pastikan sesuai.
-- **Teks "Program kerja 2019–2024"** di situs sumber tidak dipakai karena sudah usang. Empat fokus kerja dipertahankan.
-- **Nama instansi** memakai "Komdigi" (Kementerian Komunikasi dan Digital), sesuai situs sumber.
-- **Logo resmi** belum dipakai karena butuh izin/aset resmi. Header memakai tanda sinyal sederhana. Letakkan logo di `public/` dan ganti `TandaSinyal` di `src/layouts/Header.tsx` bila sudah ada.
-- **Gambar** tidak dipakai sama sekali (hero, berita). Halaman tetap ringan; tambahkan bila sudah ada aset berizin.
-- **OG image** belum ada; Open Graph memakai kartu `summary` tanpa gambar.
-- Lighthouse belum dijalankan dan tampilan belum dicek di peramban pada 360/768/1280 px. Lakukan sebelum rilis.
-
-## Yang sengaja tidak dibawa dari situs sumber
-
-Widget aksesibilitas pihak ketiga, TTS/penerjemah, Google Analytics, banner cookie, carousel otomatis, "Topik Pilihanku", statistik konten negatif, dan galeri tautan. Semuanya di luar ruang lingkup environment.
