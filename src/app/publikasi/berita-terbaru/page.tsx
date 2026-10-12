@@ -6,6 +6,7 @@ import { Placeholder } from "@/components/Placeholder";
 import { Pagination } from "@/components/Pagination";
 import { paginate } from "@/utils/paginate";
 import { EmptyState } from "@/components/EmptyState";
+import { Reveal } from "@/components/Reveal";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -87,11 +88,13 @@ export default async function BeritaTerbaruPage({
           />
         ) : (
           <>
+            <Reveal stagger>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {paginatedArticles.map((article) => (
                 <ArticleCard key={article.id} article={article} />
               ))}
             </ul>
+            </Reveal>
             <Pagination
               basePath="/publikasi/berita-terbaru"
               safePage={safePage}

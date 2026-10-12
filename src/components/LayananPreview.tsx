@@ -6,6 +6,7 @@ import { SERVICE_GROUPS, LAYANAN } from "@/constants/layanan";
 import { PERIZINAN_ONLINE } from "@/constants/perizinan-online";
 import type { Service, ServiceGroup } from "@/types";
 import { ExternalLink } from "@/components/external-link";
+import { Reveal } from "@/components/Reveal";
 
 type PerizinanOnlineItem = typeof PERIZINAN_ONLINE[number];
 
@@ -37,6 +38,7 @@ export default function LayananPreview() {
   return (
     <section id="layanan" aria-labelledby="services-heading" className="section bg-paper bleed bleed-paper">
       <div className="wrap">
+        <Reveal>
         <h2 id="services-heading" className="text-step-3 font-bold text-navy-deep">
           Layanan untuk masyarakat
         </h2>
@@ -106,6 +108,7 @@ export default function LayananPreview() {
             Lihat semua layanan
           </Link>
         </div>
+        </Reveal>
       </div>
     </section>
   );

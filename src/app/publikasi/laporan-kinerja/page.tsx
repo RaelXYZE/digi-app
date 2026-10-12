@@ -6,6 +6,7 @@ import { Pagination } from "@/components/Pagination";
 import { formatDate } from "@/utils/format-date";
 import { paginate } from "@/utils/paginate";
 import { EmptyState } from "@/components/EmptyState";
+import { Reveal } from "@/components/Reveal";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -120,11 +121,13 @@ export default async function LaporanKinerjaPage({
           />
         ) : (
           <>
+            <Reveal stagger>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {pageItems.map((item) => (
                 <ReportCard key={item.id} report={item} />
               ))}
             </ul>
+            </Reveal>
             <Pagination
               basePath="/publikasi/laporan-kinerja"
               safePage={safePage}

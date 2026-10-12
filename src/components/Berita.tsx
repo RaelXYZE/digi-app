@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { getBerita } from "@/utils/api";
+import { Reveal } from "@/components/Reveal";
 
 export default async function Berita() {
   const berita = await getBerita().catch(() => null);
@@ -14,6 +15,7 @@ export default async function Berita() {
   return (
     <section id="berita" aria-labelledby="news-heading" className="section bg-white bleed bleed-white">
       <div className="wrap">
+        <Reveal>
         <h2 id="news-heading" className="text-step-3 font-bold text-navy-deep">
           Berita terbaru
         </h2>
@@ -96,6 +98,7 @@ export default async function Berita() {
             Semua berita
           </Link>
         </div>
+        </Reveal>
       </div>
     </section>
   );

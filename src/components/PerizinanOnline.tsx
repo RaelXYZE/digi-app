@@ -1,5 +1,6 @@
 import { PERIZINAN_ONLINE } from "@/constants/perizinan-online";
 import { ExternalLink } from "@/components/external-link";
+import { Reveal } from "@/components/Reveal";
 
 export default function PerizinanOnline() {
   return (
@@ -15,6 +16,7 @@ export default function PerizinanOnline() {
           Anda dapat mengajukan secara mandiri
         </p>
 
+        <Reveal stagger>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PERIZINAN_ONLINE.map((item) => (
             <li key={item.id}>
@@ -27,6 +29,7 @@ export default function PerizinanOnline() {
             </li>
           ))}
         </ul>
+        </Reveal>
       </div>
     </section>
   );

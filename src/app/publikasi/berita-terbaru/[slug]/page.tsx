@@ -5,6 +5,7 @@ import { SITE } from "@/constants/site";
 import { getBeritaItem } from "@/utils/api";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import type { Article } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -48,13 +49,12 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
   return (
     <section className="section bg-white bleed bleed-white">
       <div className="wrap">
-        <nav aria-label="Breadcrumb" className="text-step--1 text-ink-soft">
-          <Link href="/publikasi/berita-terbaru" className="text-ink-soft underline-offset-4 hover:underline">
-            Berita Terbaru
-          </Link>
-          {" / "}
-          <span className="text-navy-deep">{article.title}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: "Berita Terbaru", href: "/publikasi/berita-terbaru" },
+            { label: article.title },
+          ]}
+        />
 
         <h1 className="mt-6 max-w-reading text-step-3 font-bold text-navy-deep">
           {article.title}

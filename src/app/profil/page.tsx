@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
 import { VISION, MISSION } from "@/constants/tentang";
 import ProfilKantor from "@/components/ProfilKantor";
+import { ProfilNav } from "@/components/ProfilNav";
 
 const hasPlaceholder =
   VISION.startsWith("[ISI") ||
@@ -16,5 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProfilPage() {
-  return <ProfilKantor />;
+  return (
+    <>
+      <ProfilNav />
+      <ProfilKantor />
+    </>
+  );
 }

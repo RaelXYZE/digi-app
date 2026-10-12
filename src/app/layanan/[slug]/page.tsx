@@ -6,6 +6,7 @@ import { SITE } from "@/constants/site";
 import { ExternalLink } from "@/components/external-link";
 import { Placeholder } from "@/components/Placeholder";
 import { isPlaceholderService } from "@/utils/placeholder";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export function generateStaticParams() {
   return LAYANAN.map((s) => ({ slug: s.id }));
@@ -32,13 +33,12 @@ export default async function ServiceDetailPage(props: PageProps<'/layanan/[slug
   return (
     <section className="section bg-white bleed bleed-white">
       <div className="wrap">
-        <nav aria-label="Breadcrumb" className="text-step--1 text-ink-soft">
-          <Link href="/layanan" className="text-ink-soft underline-offset-4 hover:underline">
-            Layanan
-          </Link>
-          {" / "}
-          <span className="text-navy-deep">{service.name}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: "Layanan", href: "/layanan" },
+            { label: service.name },
+          ]}
+        />
 
         <h1 className="mt-6 max-w-reading text-step-3 font-bold text-navy-deep">
           {service.name}

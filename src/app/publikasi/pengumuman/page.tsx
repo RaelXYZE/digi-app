@@ -5,6 +5,7 @@ import { PublicationCard } from "@/components/PublicationCard";
 import { Pagination } from "@/components/Pagination";
 import { paginate } from "@/utils/paginate";
 import { EmptyState } from "@/components/EmptyState";
+import { Reveal } from "@/components/Reveal";
 
 const PAGE_SIZE = 6;
 
@@ -60,6 +61,7 @@ export default async function PengumumanPage({
           />
         ) : (
           <>
+            <Reveal stagger>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((item) => (
                 <PublicationCard
@@ -71,6 +73,7 @@ export default async function PengumumanPage({
                 />
               ))}
             </ul>
+            </Reveal>
             <Pagination
               basePath="/publikasi/pengumuman"
               safePage={safePage}

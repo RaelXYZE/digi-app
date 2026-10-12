@@ -1,6 +1,7 @@
 import { PROFILE, HEAD } from "@/constants/tentang";
 import { SITE } from "@/constants/site";
 import { Placeholder } from "@/components/Placeholder";
+import { Reveal } from "@/components/Reveal";
 
 export default function TentangKami() {
   return (
@@ -15,6 +16,7 @@ export default function TentangKami() {
       />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/60 sm:bg-white/85" />
       <div className="wrap relative">
+        <Reveal>
         <h2 id="about-heading" className="max-w-[35ch] text-step-3 font-bold text-navy-deep">
           Tentang {SITE.name}
         </h2>
@@ -35,6 +37,7 @@ export default function TentangKami() {
             <Placeholder>{"Coming Soon"}</Placeholder>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -199,6 +199,35 @@
   }
 }
 
+/* Scroll reveal — progressive enhancement: content visible by default,
+   hidden state applied only via JS (Reveal component) to elements below fold. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-init:not([data-stagger]) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .reveal-in:not([data-stagger]) {
+    animation: fade-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .reveal-init[data-stagger] > * > * {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .reveal-in[data-stagger] > * > * {
+    animation: fade-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+[data-stagger] > * > *:nth-child(1) { --reveal-delay: 0ms; }
+[data-stagger] > * > *:nth-child(2) { --reveal-delay: 80ms; }
+[data-stagger] > * > *:nth-child(3) { --reveal-delay: 160ms; }
+[data-stagger] > * > *:nth-child(4) { --reveal-delay: 240ms; }
+[data-stagger] > * > *:nth-child(5) { --reveal-delay: 320ms; }
+[data-stagger] > * > *:nth-child(6) { --reveal-delay: 400ms; }
+[data-stagger] > * > *:nth-child(7) { --reveal-delay: 480ms; }
+[data-stagger] > * > *:nth-child(8) { --reveal-delay: 560ms; }
+
 /* One entrance moment in hero; disabled when user prefers reduced motion */
 @keyframes fade-in {
   from {

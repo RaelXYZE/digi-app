@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SERVICE_GROUPS, LAYANAN } from "@/constants/layanan";
 import type { Service as ServiceType } from "@/types";
 import { ExternalLink } from "@/components/external-link";
+import { Reveal } from "@/components/Reveal";
 
 function ServiceCard({ s }: { s: ServiceType }) {
   return (
@@ -101,11 +102,13 @@ export default function Layanan() {
                     {g.title}
                   </h2>
                   <p className="mt-1 max-w-reading text-ink-soft">{g.intro}</p>
+                  <Reveal stagger>
                   <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {items.map((s) => (
                       <ServiceCard key={s.id} s={s} />
                     ))}
                   </ul>
+                  </Reveal>
                 </section>
               );
             })}

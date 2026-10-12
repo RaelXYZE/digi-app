@@ -1,5 +1,6 @@
 import { Placeholder } from "@/components/Placeholder";
 import { EmptyState } from "@/components/EmptyState";
+import { Reveal } from "@/components/Reveal";
 import { getPegawai } from "@/utils/api";
 import type { Employee } from "@/types";
 
@@ -57,6 +58,7 @@ export default async function DaftarPegawai() {
             message="Belum ada data pegawai yang ditampilkan."
           />
         ) : (
+          <Reveal stagger>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {employees.map((e) => (
               <li key={e.id} className="flex gap-4 border border-line bg-white p-5">
@@ -72,6 +74,7 @@ export default async function DaftarPegawai() {
               </li>
             ))}
           </ul>
+          </Reveal>
         )}
       </div>
     </section>
