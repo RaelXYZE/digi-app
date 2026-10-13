@@ -186,6 +186,23 @@
   .bleed-white { --bleed-color: #fff; }
   .bleed-paper { --bleed-color: var(--color-paper); }
   .bleed-mist { --bleed-color: var(--color-mist); }
+
+  .skeleton {
+    background: var(--color-mist);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-mist) 0%, var(--color-line) 50%, var(--color-mist) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
 }
 
 .card-hover {
