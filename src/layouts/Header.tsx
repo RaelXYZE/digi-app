@@ -297,7 +297,7 @@ export default function Header() {
                       {item.label}
                       <svg
                         viewBox="0 0 24 24"
-                        className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        className={`h-4 w-4 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}
                         aria-hidden="true"
                         focusable="false"
                       >

@@ -60,7 +60,7 @@ export function NavDropdown({ item, pathname, isOpen, isCurrentSection, onToggle
         {item.label}
         <svg
           viewBox="0 0 24 24"
-          className={`ml-1 h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`ml-1 h-4 w-4 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
           focusable="false"
         >

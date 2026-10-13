@@ -12,7 +12,7 @@ export const SITE = {
   officialSite: "https://www.komdigi.go.id",
   address: " Jl. Raya Sentani No. 21, Kel. Hedam, Kec. Heram, Kota Jayapura, Papua 99351",
   phone: "(0967)571945",
-  phoneHref: "tel:+62213504024",
+  phoneHref: "tel:+62967571945",
   email: "upt_jayapura@postel.go.id",
   social: [
     { id: "instagram", name: "Instagram", url: "https://www.instagram.com/balmon_jayapura/" },

@@ -1,4 +1,5 @@
 "use client";
+import { useSyncExternalStore } from "react";
 import { Particles, ParticlesProvider, useParticlesProvider } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine, ISourceOptions } from "@tsparticles/engine";
@@ -28,9 +29,24 @@ const initEngine = async (engine: Engine) => {
   await loadSlim(engine);
 };
 
+const subscribeReducedMotion = (callback: () => void) => {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+};
+
+const getReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const getReducedMotionServer = () => false;
+
 function ParticlesContent({ id }: { id: string }) {
   const { loaded } = useParticlesProvider();
-  if (!loaded) return null;
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getReducedMotionServer,
+  );
+
+  if (!loaded || reducedMotion) return null;
   return (
     <Particles
       id={id}

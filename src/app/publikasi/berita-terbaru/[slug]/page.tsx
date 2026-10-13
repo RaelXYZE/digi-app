@@ -6,6 +6,7 @@ import { getBeritaItem } from "@/utils/api";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { EmptyState } from "@/components/EmptyState";
 import type { Article } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -36,10 +37,12 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
       <section className="section bg-white bleed bleed-white">
         <div className="wrap">
           <h1 className="text-step-3 font-bold text-navy-deep">Berita</h1>
-          <p className="mt-8 text-ink-soft">
-            Berita sedang tidak dapat dimuat dari server. Silakan coba lagi
-            sebentar.
-          </p>
+          <EmptyState
+            variant="error"
+            message="Berita sedang tidak dapat dimuat dari server. Silakan coba lagi sebentar."
+            actionHref="/publikasi/berita-terbaru"
+            actionLabel="Kembali ke berita terbaru"
+          />
         </div>
       </section>
     );
