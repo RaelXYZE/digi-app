@@ -183,7 +183,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
               {PROVINSI.map((p) => (
                 <div key={p.nama}>
                   <h3 className="mb-2 font-display text-step--1 font-bold text-navy-deep">{p.nama}</h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                     {data
                       .filter((d) => d.province === p.nama)
                       .map((d) => (
@@ -194,9 +194,10 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                           onClick={() => toggle(d.id)}
                           onMouseEnter={() => setHoverId(d.id)}
                           onMouseLeave={() => setHoverId(null)}
-                          className="rounded-full border border-line bg-white px-3 py-1 text-step--1 hover:border-brand aria-pressed:border-navy-deep aria-pressed:bg-navy-deep aria-pressed:text-white"
+                          className="relative flex min-h-11 items-center border border-line bg-white px-3 py-2 text-left text-step--1 transition-colors hover:border-brand hover:bg-mist aria-pressed:border-brand aria-pressed:bg-brand aria-pressed:text-white aria-pressed:hover:bg-brand motion-reduce:transition-none"
                         >
-                          {d.name.replace(/^Kab\. /, "")}
+                          <span aria-hidden="true" className={`absolute inset-y-0 left-0 w-1 ${provinsiOf(d.province).dot}`} />
+                          <span className="pl-1.5">{d.name.replace(/^Kab\. /, "")}</span>
                         </button>
                       ))}
                   </div>
