@@ -12,7 +12,7 @@ npm run dev        # http://localhost:3000  (backend digi-api harus jalan di :80
 npm run build && npm start
 ```
 
-Konfigurasi `.env`: lihat `.env.example` (tracked di git). `API_URL` = base URL digi-api (server-only, default `http://localhost:8000`); `SITE_URL` untuk metadata/OG/sitemap (server-only, default `http://localhost:3000`). Kedua variabel divalidasi di `src/utils/env.ts` — di produksi, wajib di-set sebelum `next build` dan `next start`.
+Konfigurasi `.env`: lihat `.env.example` (tracked di git). `API_URL` = base URL digi-api (server-only, default `http://localhost:8000`); `SITE_URL` untuk metadata/OG/sitemap (server-only, default `http://localhost:3000`). Kedua variabel divalidasi di `src/utils/env.ts` — di produksi, wajib di-set sebelum `next build` dan `next start`. `ALLOW_LOCALHOST_URLS=true` hanya untuk uji produksi lokal (SITE_URL localhost); API_URL boleh loopback di produksi.
 
 ## Stack
 
@@ -39,5 +39,5 @@ String berawalan `[ISI: ...]` dirender kuning lewat komponen `Placeholder`. Cari
 
 ## Verifikasi
 
-`npx tsc --noEmit` + `npm run lint` (tidak ada test runner). Setelah perubahan struktur besar: `/graphify --update`.
+`npm run build` (atau `npx next typegen`) lalu `npx tsc --noEmit` + `npm run lint` (tidak ada test runner). `tsc` membutuhkan tipe rute yang di-generate Next.js ke `.next/types` — fresh clone perlu build atau typegen sebelum tsc. Setelah perubahan struktur besar: `/graphify --update`.
 

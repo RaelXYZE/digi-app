@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Meta } from "@/components/meta";
 import { SITE } from "@/constants/site";
 import { getBerita, getHealth } from "@/utils/api";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function StatusApiPage() {
+  if (process.env.NODE_ENV !== "development") notFound();
   const health = await getHealth().catch(() => null);
   const berita = await getBerita().catch(() => null);
 
