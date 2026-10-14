@@ -7,7 +7,7 @@ import Header from "@/layouts/Header";
 import Footer from "@/layouts/Footer";
 import { BackToTop } from "@/components/BackToTop";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { siteUrl } from "@/utils/env";
 const title = `${SITE.name}: ${SITE.fullName}`;
 
 export const metadata: Metadata = {

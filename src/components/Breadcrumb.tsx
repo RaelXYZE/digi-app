@@ -7,7 +7,7 @@ type BreadcrumbProps = {
   items: BreadcrumbItem[];
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { siteUrl } from "@/utils/env";
 
 export async function Breadcrumb({ items }: BreadcrumbProps) {
   const nonce = (await headers()).get("x-nonce") ?? "";

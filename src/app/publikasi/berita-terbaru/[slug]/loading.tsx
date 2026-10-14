@@ -7,11 +7,12 @@ export default function Loading() {
         <div role="status">
           <span className="sr-only">Memuat&hellip;</span>
         </div>
-        <div aria-hidden="true" className="text-step--1 text-ink-soft">
-          <SkeletonBlock className="h-4 w-48" />
+        <div aria-hidden="true" className="text-step--1 text-ink-soft w-48">
+          <SkeletonBlock className="w-full">&nbsp;</SkeletonBlock>
         </div>
-        <div aria-hidden="true" className="mt-6 max-w-reading">
-          <SkeletonBlock className="h-8 w-full" />
+        <div aria-hidden="true" className="mt-6 max-w-reading text-step-3">
+          <SkeletonBlock className="w-full">&nbsp;</SkeletonBlock>
+          <SkeletonBlock className="w-3/4">&nbsp;</SkeletonBlock>
         </div>
         <div aria-hidden="true" className="mt-4">
           <SkeletonBlock className="h-4 w-32" />

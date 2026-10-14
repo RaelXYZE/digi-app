@@ -1,7 +1,8 @@
 import type { Article, Employee, GalleryItem, HomeStat } from "@/types";
 import { isArticle, isEmployee, isGalleryItem, isHomeStat } from "@/utils/type-guards";
+import { apiUrl } from "@/utils/env";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_URL = apiUrl;
 
 export type ApiHealth = {
   status: string;

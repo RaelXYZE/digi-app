@@ -4,7 +4,7 @@ import { NOINDEX_ROUTES } from "@/constants/site";
 import { isPlaceholderService } from "@/utils/placeholder";
 import { getBerita } from "@/utils/api";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { siteUrl } from "@/utils/env";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [

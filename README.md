@@ -12,7 +12,7 @@ npm run dev        # http://localhost:3000  (backend digi-api harus jalan di :80
 npm run build && npm start
 ```
 
-Konfigurasi `.env`: lihat `.env.example`. `NEXT_PUBLIC_API_URL` = base URL digi-api (default `http://localhost:8000`); `NEXT_PUBLIC_SITE_URL` untuk metadata/OG/sitemap.
+Konfigurasi `.env`: lihat `.env.example` (tracked di git). `API_URL` = base URL digi-api (server-only, default `http://localhost:8000`); `SITE_URL` untuk metadata/OG/sitemap (server-only, default `http://localhost:3000`). Kedua variabel divalidasi di `src/utils/env.ts` — di produksi, wajib di-set sebelum `next build` dan `next start`.
 
 ## Stack
 
