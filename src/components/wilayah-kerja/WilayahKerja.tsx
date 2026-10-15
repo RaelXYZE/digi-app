@@ -189,7 +189,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
             </div>
 
             <div className="mt-5">
-              <div role="group" aria-label="Pilih provinsi" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+              <div role="group" aria-label="Pilih provinsi" className="grid grid-cols-3 gap-2">
                 {PROVINSI.map((p) => (
                   <button
                     key={p.nama}
@@ -199,10 +199,11 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                       setActiveProvince(p.nama);
                       setHoverId(null);
                     }}
-                    className="flex min-h-11 items-center gap-2 border border-line bg-white px-3 py-2 text-step--1 font-semibold transition-colors hover:border-brand hover:bg-mist aria-pressed:border-brand aria-pressed:bg-brand aria-pressed:text-white motion-reduce:transition-none"
+                    className="flex min-h-11 flex-col items-center justify-center gap-1 border border-line bg-white px-2 py-2 text-step--1 font-semibold transition-colors hover:border-brand hover:bg-mist aria-pressed:border-brand aria-pressed:bg-brand aria-pressed:text-white aria-pressed:hover:bg-brand motion-reduce:transition-none"
                   >
                     <span aria-hidden="true" className={`inline-block size-2.5 rounded-full ring-1 ring-white/40 ${p.dot}`} />
-                    {p.nama} ({countIn(p.nama)})
+                    <span className="min-w-0 text-center leading-tight">{p.nama}</span>
+                    <span className="text-step--2 font-normal opacity-80">{countIn(p.nama)} kab/kota</span>
                   </button>
                 ))}
               </div>
