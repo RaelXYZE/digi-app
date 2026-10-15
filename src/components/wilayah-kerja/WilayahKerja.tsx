@@ -11,11 +11,20 @@ const provinsiOf = (p: Provinsi) => PROVINSI.find((x) => x.nama === p)!;
 export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
+  const [activeProvince, setActiveProvince] = useState<Provinsi>(PROVINSI[0].nama);
   const [tip, setTip] = useState<{ name: string; x: number; y: number } | null>(null);
   const boxRef = useRef<HTMLDivElement>(null);
 
   const selected = data.find((d) => d.id === selectedId) ?? null;
-  const toggle = (id: string) => setSelectedId((cur) => (cur === id ? null : id));
+  const toggle = (id: string) => {
+    if (selectedId === id) {
+      setSelectedId(null);
+      return;
+    }
+    const item = data.find((d) => d.id === id);
+    if (item) setActiveProvince(item.province);
+    setSelectedId(id);
+  };
   const total = (k: "kecamatan" | "desa") => data.reduce((a, d) => a + d[k], 0);
   const countIn = (p: Provinsi) => data.filter((d) => d.province === p).length;
 
@@ -179,11 +188,32 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
               )}
             </div>
 
-            <div className="mt-5 grid gap-4">
-              {PROVINSI.map((p) => (
-                <div key={p.nama}>
-                  <h3 className="mb-2 font-display text-step--1 font-bold text-navy-deep">{p.nama}</h3>
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="mt-5">
+              <div role="group" aria-label="Pilih provinsi" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+                {PROVINSI.map((p) => (
+                  <button
+                    key={p.nama}
+                    type="button"
+                    aria-pressed={activeProvince === p.nama}
+                    onClick={() => {
+                      setActiveProvince(p.nama);
+                      setHoverId(null);
+                    }}
+                    className="flex min-h-11 items-center gap-2 border border-line bg-white px-3 py-2 text-step--1 font-semibold transition-colors hover:border-brand hover:bg-mist aria-pressed:border-brand aria-pressed:bg-brand aria-pressed:text-white motion-reduce:transition-none"
+                  >
+                    <span aria-hidden="true" className={`inline-block size-2.5 rounded-full ring-1 ring-white/40 ${p.dot}`} />
+                    {p.nama} ({countIn(p.nama)})
+                  </button>
+                ))}
+              </div>
+              <div className="mt-3 grid">
+                {PROVINSI.map((p) => (
+                  <div
+                    key={p.nama}
+                    role="group"
+                    aria-label={`Kabupaten/kota di ${p.nama}`}
+                    className={`col-start-1 row-start-1 grid grid-cols-2 gap-2 sm:grid-cols-3 ${activeProvince === p.nama ? "" : "invisible"}`}
+                  >
                     {data
                       .filter((d) => d.province === p.nama)
                       .map((d) => (
@@ -201,8 +231,8 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                         </button>
                       ))}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
