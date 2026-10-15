@@ -157,7 +157,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                     type="button"
                     onClick={() => setSelectedId(null)}
                     className="mt-4 rounded border border-brand px-3 py-1.5 text-step--1 text-brand hover:bg-brand hover:text-white"
-                  >
+                  > 
                     Tampilkan ringkasan
                   </button>
                 </>
@@ -165,7 +165,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                 <>
                   <h3 className="font-display text-step-1 font-bold text-navy-deep">Mencakup {data.length} Kabupaten/Kota</h3>
                   <p className="mt-1 text-step--1 text-ink-soft">
-                    Belum ada wilayah dipilih. Arahkan kursor atau ketuk wilayah pada peta.
+                    Arahkan kursor atau ketuk wilayah pada peta.
                   </p>
                   <dl className="mt-4 grid grid-cols-3 gap-3">
                     {PROVINSI.map((p) => (
