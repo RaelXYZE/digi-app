@@ -58,8 +58,8 @@ export function StatCard({
   return (
     <div
       ref={ref}
-      className={`rounded-lg p-4 ${
-        featured ? "border border-signal bg-white/10" : "bg-white/5"
+      className={`rounded-lg p-4 border transition-colors motion-reduce:transition-none ${
+        featured ? "border-signal bg-white/10" : "border-transparent bg-white/5"
       }`}
     >
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-signal">

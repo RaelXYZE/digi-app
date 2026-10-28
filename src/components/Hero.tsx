@@ -1,5 +1,5 @@
 import ParticleBackground from "@/components/tsParticles";
-import { StatCard } from "@/components/StatCard";
+import { StatGrid } from "@/components/StatGrid";
 import { getStatistik } from "@/utils/api";
 
 function StatIcon({ id }: { id: string }) {
@@ -163,16 +163,7 @@ export default async function Hero() {
           </div>
         ) : (
           stats.length > 0 && (
-            <div className="fade-in fade-in-delayed grid grid-cols-2 gap-4">
-              {stats.map((item, i) => (
-                <StatCard
-                  key={item.id}
-                  stat={item}
-                  icon={<StatIcon id={item.id} />}
-                  featured={i === 0}
-                />
-              ))}
-            </div>
+            <StatGrid stats={stats} icons={stats.map((s) => <StatIcon key={s.id} id={s.id} />)} />
           )
         )}
       </div>
