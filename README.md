@@ -27,7 +27,7 @@ Satu klien fetch terpusat: `src/utils/api.ts` (`getBerita`, `getBeritaItem`, `ge
 - Identitas, menu, sosial: `src/constants/site.ts`
 - Layanan & tautan: `src/constants/layanan.ts`, `src/constants/perizinan-online.ts`
 - Konten profil (visi/misi/dll): `src/constants/tentang.ts`
-- Wilayah kerja (peta): `src/components/wilayah-kerja/data.ts` (DEMO)
+- Wilayah kerja: data dari API (`getWilayahKerja`), peta SVG tetap lokal (`map-paths.ts`)
 
 ## Token desain
 

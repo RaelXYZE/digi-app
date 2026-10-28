@@ -1,5 +1,6 @@
 import type { Article, Employee, GalleryItem, HomeStat } from "@/types";
-import { isArticle, isEmployee, isGalleryItem, isHomeStat } from "@/utils/type-guards";
+import type { Kabupaten } from "@/components/wilayah-kerja/types";
+import { isArticle, isEmployee, isGalleryItem, isHomeStat, isWilayahKerja } from "@/utils/type-guards";
 import { apiUrl } from "@/utils/env";
 
 const API_URL = apiUrl;
@@ -79,4 +80,13 @@ export async function getGaleri(): Promise<GalleryItem[]> {
   if (!res.ok) throw new Error(`Daftar galeri gagal: ${res.status}`);
   const data: unknown = await res.json();
   return Array.isArray(data) ? data.filter(isGalleryItem) : [];
+}
+
+export async function getWilayahKerja(): Promise<Kabupaten[]> {
+  const res = await fetch(`${API_URL}/api/v1/wilayah-kerja/`, {
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) throw new Error(`Daftar wilayah kerja gagal: ${res.status}`);
+  const data: unknown = await res.json();
+  return Array.isArray(data) ? data.filter(isWilayahKerja) : [];
 }

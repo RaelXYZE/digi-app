@@ -1,32 +1,49 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { KABUPATEN } from "./data";
 import { CONTEXT_PATHS, MAP_VIEWBOX, REGION_PATHS } from "./map-paths";
 import { PROVINSI, type Kabupaten, type Provinsi } from "./types";
+import { EmptyState } from "@/components/EmptyState";
 
 const fmt = (n: number) => n.toLocaleString("id-ID");
-const provinsiOf = (p: Provinsi) => PROVINSI.find((x) => x.nama === p)!;
+const provinsiOf = (p: Provinsi) => PROVINSI.find((x) => x.nama === p) ?? PROVINSI[0];
 
-export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
+export function WilayahKerja({ data }: { data: Kabupaten[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [activeProvince, setActiveProvince] = useState<Provinsi>(PROVINSI[0].nama);
   const [tip, setTip] = useState<{ name: string; x: number; y: number } | null>(null);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const selected = data.find((d) => d.id === selectedId) ?? null;
+  const sorted = data
+    .slice()
+    .sort((a, b) => a.province.localeCompare(b.province) || a.name.localeCompare(b.name));
+  const selected = sorted.find((d) => d.id === selectedId) ?? null;
   const toggle = (id: string) => {
     if (selectedId === id) {
       setSelectedId(null);
       return;
     }
-    const item = data.find((d) => d.id === id);
+    const item = sorted.find((d) => d.id === id);
     if (item) setActiveProvince(item.province);
     setSelectedId(id);
   };
-  const total = (k: "kecamatan" | "desa") => data.reduce((a, d) => a + d[k], 0);
-  const countIn = (p: Provinsi) => data.filter((d) => d.province === p).length;
+  const total = (k: "kecamatan" | "desa") => sorted.reduce((a, d) => a + d[k], 0);
+  const countIn = (p: Provinsi) => sorted.filter((d) => d.province === p).length;
+
+  if (sorted.length === 0) {
+    return (
+      <section className="section bg-white bleed bleed-white">
+        <div className="wrap">
+          <h1 className="text-step-3 font-bold text-navy-deep">Wilayah Kerja</h1>
+          <EmptyState
+            variant="empty"
+            message="Belum ada data wilayah kerja yang ditampilkan."
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="section bg-white bleed bleed-white">
@@ -38,13 +55,13 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
         >
           <div className="lg:col-start-1 lg:row-start-1">
             <p className="max-w-xl text-ink-soft">
-              Balai Monitor SFR &amp; Infrastruktur Digital Kelas II Jayapura mencakup {data.length}{" "}
+              Balai Monitor SFR &amp; Infrastruktur Digital Kelas II Jayapura mencakup {sorted.length}{" "}
               kabupaten/kota di Provinsi Papua, Papua Tengah, dan Papua Pegunungan. Pilih satu wilayah di
               peta atau daftar untuk melihat ringkasannya.
             </p>
             <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-y border-line py-4">
               {[
-                [data.length, "Kabupaten/Kota"],
+                [sorted.length, "Kabupaten/Kota"],
                 [total("kecamatan"), "Kecamatan"],
                 [total("desa"), "Desa/Kelurahan"],
               ].map(([n, label]) => (
@@ -62,7 +79,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                 viewBox={MAP_VIEWBOX}
                 className="block h-auto w-full"
                 role="group"
-                aria-label={`Peta ${data.length} kabupaten/kota wilayah kerja`}
+                aria-label={`Peta ${sorted.length} kabupaten/kota wilayah kerja`}
                 onClick={() => setSelectedId(null)}
               >
                 <g aria-hidden="true" className="fill-line stroke-white">
@@ -71,7 +88,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                   ))}
                 </g>
                 <g>
-                  {data.map((d) => {
+                  {sorted.map((d) => {
                     const path = REGION_PATHS[d.id];
                     if (!path) return null;
                     return (
@@ -172,7 +189,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                 </>
               ) : (
                 <>
-                  <h3 className="font-display text-step-1 font-bold text-navy-deep">Mencakup {data.length} Kabupaten/Kota</h3>
+                  <h3 className="font-display text-step-1 font-bold text-navy-deep">Mencakup {sorted.length} Kabupaten/Kota</h3>
                   <p className="mt-1 text-step--1 text-ink-soft">
                     Arahkan kursor atau ketuk wilayah pada peta.
                   </p>
@@ -215,7 +232,7 @@ export function WilayahKerja({ data = KABUPATEN }: { data?: Kabupaten[] }) {
                     aria-label={`Kabupaten/kota di ${p.nama}`}
                     className={`col-start-1 row-start-1 grid grid-cols-2 gap-2 sm:grid-cols-3 ${activeProvince === p.nama ? "" : "invisible"}`}
                   >
-                    {data
+                    {sorted
                       .filter((d) => d.province === p.nama)
                       .map((d) => (
                         <button

@@ -1,4 +1,5 @@
 import type { Article, GalleryItem, Employee, HomeStat } from "@/types";
+import { PROVINSI, type Kabupaten } from "@/components/wilayah-kerja/types";
 
 function isStringRecord(x: unknown): x is Record<string, unknown> {
   return typeof x === "object" && x !== null;
@@ -60,5 +61,29 @@ export function isHomeStat(x: unknown): x is HomeStat {
     x.value >= 0 &&
     (x.suffix === undefined || typeof x.suffix === "string") &&
     (x.unit === undefined || typeof x.unit === "string")
+  );
+}
+
+/** Runtime guard for WilayahKerja JSON. Province must match a PROVINSI key. */
+export function isWilayahKerja(x: unknown): x is Kabupaten {
+  if (!isStringRecord(x)) return false;
+  return (
+    typeof x.id === "string" &&
+    x.id.length > 0 &&
+    typeof x.name === "string" &&
+    x.name.length > 0 &&
+    typeof x.province === "string" &&
+    PROVINSI.some((p) => p.nama === x.province) &&
+    typeof x.capital === "string" &&
+    x.capital.length > 0 &&
+    typeof x.kecamatan === "number" &&
+    Number.isInteger(x.kecamatan) &&
+    x.kecamatan >= 0 &&
+    typeof x.desa === "number" &&
+    Number.isInteger(x.desa) &&
+    x.desa >= 0 &&
+    typeof x.stasiun === "number" &&
+    Number.isInteger(x.stasiun) &&
+    x.stasiun >= 0
   );
 }
