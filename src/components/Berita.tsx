@@ -73,7 +73,7 @@ export default async function Berita() {
                   <article className="border-b border-line py-5">
                     <Meta date={article.date} category={article.category} />
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
-                      <Link
+                        <Link
                         href={`/publikasi/berita-terbaru/${article.id}`}
                         className="text-navy-deep underline-offset-4 hover:underline"
                       >
