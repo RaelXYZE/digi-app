@@ -22,16 +22,16 @@ function Avatar({ employee }: { employee: Employee }) {
         src={employee.image}
         alt={`Foto ${employee.name}`}
         loading="lazy"
-        width={96}
-        height={128}
-        className="w-24 shrink-0 aspect-[3/4] rounded-md border border-line bg-mist object-cover"
+        width={80}
+        height={107}
+        className="w-20 shrink-0 aspect-[3/4] rounded-md border border-line bg-mist object-cover"
       />
     );
   }
   return (
     <div
       aria-hidden="true"
-      className="flex w-24 shrink-0 aspect-[3/4] items-center justify-center rounded-md bg-mist font-display text-step-0 font-bold text-navy-deep"
+      className="flex w-20 shrink-0 aspect-[3/4] items-center justify-center rounded-md bg-mist font-display text-step-0 font-bold text-navy-deep"
     >
       {initials(employee.name)}
     </div>

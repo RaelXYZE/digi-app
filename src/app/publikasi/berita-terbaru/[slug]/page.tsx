@@ -7,6 +7,8 @@ import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { EmptyState } from "@/components/EmptyState";
+import { ViewsBadge } from "@/components/ViewsBadge";
+import { ViewTracker } from "@/components/ViewTracker";
 import type { Article } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -64,6 +66,8 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
         </h1>
 
         <Meta date={article.date} category={article.category} className="mt-4" />
+        <ViewsBadge views={article.views} className="mt-2" />
+        <ViewTracker id={slug} />
         {article.author && (
           <p className="mt-1 text-step--1 text-ink-soft">
             <Placeholder>{article.author}</Placeholder>

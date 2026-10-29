@@ -14,6 +14,8 @@ export type Article = {
   author?: string;
   /** Direct link to the document (e.g. PDF): site-relative "/..." or https URL. */
   fileUrl?: string;
+  /** View count. Optional; backend field not shipped yet. */
+  views?: number;
 };
 
 export type ServiceGroup = "utama" | "pengaduan" | "informasi";

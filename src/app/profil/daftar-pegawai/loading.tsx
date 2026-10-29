@@ -13,7 +13,7 @@ export default function Loading() {
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }, (_, i) => (
             <li key={i} className="flex gap-4 border border-line bg-white p-5">
-              <SkeletonBlock className="w-24 shrink-0 aspect-[3/4] rounded-md" />
+              <SkeletonBlock className="w-20 shrink-0 aspect-[3/4] rounded-md" />
               <div className="flex flex-col gap-2">
                 <SkeletonBlock className="h-5 w-32" />
                 <SkeletonBlock className="h-4 w-24" />

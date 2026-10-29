@@ -22,7 +22,11 @@ export function isArticle(x: unknown): x is Article {
       (typeof x.fileUrl === "string" &&
         !/[\\\x00-\x20\x7F]/.test(x.fileUrl) &&
         ((x.fileUrl.startsWith("/") && !x.fileUrl.startsWith("//")) ||
-          x.fileUrl.startsWith("https://"))))
+          x.fileUrl.startsWith("https://")))) &&
+    (x.views === undefined ||
+      (typeof x.views === "number" &&
+        Number.isInteger(x.views) &&
+        x.views >= 0))
   );
 }
 

@@ -7,6 +7,7 @@ import { Pagination } from "@/components/Pagination";
 import { paginate } from "@/utils/paginate";
 import { EmptyState } from "@/components/EmptyState";
 import { Reveal } from "@/components/Reveal";
+import { ViewsBadge } from "@/components/ViewsBadge";
 import type { Article } from "@/types";
 
 const PAGE_SIZE = 6;
@@ -38,6 +39,7 @@ function ArticleCard({ article }: { article: Article }) {
           <h2 className="line-clamp-2 font-display text-step-0 font-bold text-navy-deep">
             {article.title}
           </h2>
+          <ViewsBadge views={article.views} className="mt-2" />
         </div>
       </Link>
     </li>
