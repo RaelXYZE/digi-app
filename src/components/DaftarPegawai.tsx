@@ -22,16 +22,16 @@ function Avatar({ employee }: { employee: Employee }) {
         src={employee.image}
         alt={`Foto ${employee.name}`}
         loading="lazy"
-        width={56}
-        height={56}
-        className="h-14 w-14 rounded-full border border-line bg-mist object-cover"
+        width={96}
+        height={128}
+        className="w-24 shrink-0 aspect-[3/4] rounded-md border border-line bg-mist object-cover"
       />
     );
   }
   return (
     <div
       aria-hidden="true"
-      className="flex h-14 w-14 items-center justify-center rounded-full bg-mist font-display text-step-0 font-bold text-navy-deep"
+      className="flex w-24 shrink-0 aspect-[3/4] items-center justify-center rounded-md bg-mist font-display text-step-0 font-bold text-navy-deep"
     >
       {initials(employee.name)}
     </div>
@@ -64,7 +64,7 @@ export default async function DaftarPegawai() {
               <li key={e.id} className="flex gap-4 border border-line bg-white p-5">
                 <Avatar employee={e} />
                 <div>
-                  <h2 className="font-display text-step-1 font-bold text-navy-deep">
+                  <h2 className="font-display text-step-0 leading-snug font-bold text-navy-deep">
                     <Placeholder>{e.name}</Placeholder>
                   </h2>
                   <p className="mt-1 text-ink-soft">
