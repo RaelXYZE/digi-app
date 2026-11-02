@@ -1,7 +1,7 @@
-import { apiUrl } from "@/utils/env";
+import { apiUrl, beritaViewsSecret } from "@/utils/env";
 
 /**
- * Same-origin proxy for the (planned) digi-api view-count endpoint.
+ * Same-origin proxy for digi-api's berita view-count endpoint.
  * Always responds 204 so the browser never sees upstream errors.
  */
 export async function POST(request: Request) {
@@ -16,8 +16,19 @@ export async function POST(request: Request) {
       return new Response(null, { status: 204 });
     }
 
-    const headers: Record<string, string> = {};
-    const clientIp = request.headers.get("x-forwarded-for");
+    // No secret configured: counting is disabled upstream. Stay silent.
+    if (!beritaViewsSecret) {
+      return new Response(null, { status: 204 });
+    }
+
+    const headers: Record<string, string> = {
+      "X-Internal-Key": beritaViewsSecret,
+    };
+    // First XFF value only; without it digi-api falls back to REMOTE_ADDR
+    // (the Next.js server IP), collapsing all visitors into one bucket.
+    const xff = request.headers.get("x-forwarded-for");
+    const realIp = request.headers.get("x-real-ip");
+    const clientIp = xff?.split(",")[0].trim() || realIp?.trim() || null;
     if (clientIp) headers["x-forwarded-for"] = clientIp;
 
     await fetch(
@@ -30,7 +41,7 @@ export async function POST(request: Request) {
       },
     );
   } catch {
-    // Upstream 404/405 (endpoint not shipped yet), timeout, or bad body: stay silent.
+    // Upstream rejection (403/404/405), timeout, or bad body: stay silent.
   }
   return new Response(null, { status: 204 });
 }

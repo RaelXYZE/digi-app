@@ -61,3 +61,10 @@ function resolveUrl(name: string, fallback: string, rejectLoopback: boolean): st
 
 export const apiUrl = resolveUrl("API_URL", "http://localhost:8000", false);
 export const siteUrl = resolveUrl("SITE_URL", "http://localhost:3000", true);
+
+/**
+ * Server-only shared secret sent as X-Internal-Key to digi-api's berita
+ * views endpoint. Empty/unset = view counting silently disabled (no fail-fast).
+ * Must hold the same value as digi-api's BERITA_VIEWS_SHARED_SECRET.
+ */
+export const beritaViewsSecret = process.env.BERITA_VIEWS_SECRET?.trim() ?? "";
