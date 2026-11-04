@@ -65,8 +65,9 @@ export default async function ArticleDetailPage({ params }: { params: Params }) 
           {article.title}
         </h1>
 
-        <Meta date={article.date} category={article.category} className="mt-4" />
-        <ViewsBadge views={article.views} className="mt-2" />
+        <Meta date={article.date} category={article.category} className="mt-4">
+          <ViewsBadge views={article.views} />
+        </Meta>
         <ViewTracker id={slug} />
         {article.author && (
           <p className="mt-1 text-step--1 text-ink-soft">

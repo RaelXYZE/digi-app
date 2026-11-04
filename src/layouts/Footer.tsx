@@ -10,7 +10,7 @@ const QUICK_LINKS = NAV.map((item) => ({
 }));
 
 const linkClass =
-  "inline-flex min-h-11 items-center text-white underline-offset-4 hover:underline";
+  "inline-flex min-h-11 items-center text-step--1 text-white underline-offset-4 hover:underline";
 
 const socialIconClass =
   "inline-flex min-h-11 items-center text-white/90 transition-colors hover:text-white";
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Tautan cepat">
-          <h2 className="font-display text-step-1 font-bold">Tautan cepat</h2>
+          <h2 className="font-display text-step-0 font-bold">Tautan cepat</h2>
           <ul className="mt-3">
             {QUICK_LINKS.map((l) => (
               <li key={l.href}>
@@ -55,20 +55,20 @@ export default function Footer() {
         </nav>
 
         <div>
-          <h2 className="font-display text-step-1 font-bold">Jam Pelayanan</h2>
+          <h2 className="font-display text-step-0 font-bold">Jam Pelayanan</h2>
           <dl className="mt-3 space-y-3">
             {SERVICE_HOURS.map((h) => (
               <div key={h.day}>
-                <dt className="font-semibold text-white">{h.day}</dt>
-                <dd className="text-white/85">{h.time}</dd>
+                <dt className="text-step--1 font-semibold text-white">{h.day}</dt>
+                <dd className="text-step--1 text-white/85">{h.time}</dd>
               </div>
             ))}
           </dl>
         </div>
 
         <nav aria-label="Kontak">
-          <h2 className="font-display text-step-1 font-bold">Kontak</h2>
-          <address className="mt-3 max-w-reading not-italic text-white/90">
+          <h2 className="font-display text-step-0 font-bold">Kontak</h2>
+          <address className="mt-3 max-w-reading text-step--1 not-italic text-white/90">
             <p>
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
@@ -101,7 +101,7 @@ export default function Footer() {
       </div>
 
       <div className="relative border-t border-white/20">
-        <p className="wrap wrap-footer relative pt-5 pb-20 text-step--1 text-white/85">
+        <p className="wrap wrap-footer relative text-step--2 pt-5 pb-20 text-white/85">
           © {year} {SITE.officialName}. Hak cipta dilindungi undang-undang.
         </p>
       </div>

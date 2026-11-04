@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Meta } from "@/components/meta";
 import { Placeholder } from "@/components/Placeholder";
+import { ViewsBadge } from "@/components/ViewsBadge";
 import { getBerita } from "@/utils/api";
 import { Reveal } from "@/components/Reveal";
 
@@ -48,7 +49,9 @@ export default async function Berita() {
                   <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
                 </div>
               )}
-              <Meta date={featured.date} category={featured.category} />
+              <Meta date={featured.date} category={featured.category}>
+                <ViewsBadge views={featured.views} />
+              </Meta>
               {featured.author && (
                 <p className="mt-1 text-step--1 text-ink-soft">
                   <Placeholder>{featured.author}</Placeholder>
@@ -71,7 +74,9 @@ export default async function Berita() {
               {rest.map((article) => (
                 <li key={article.id}>
                   <article className="border-b border-line py-5">
-                    <Meta date={article.date} category={article.category} />
+                    <Meta date={article.date} category={article.category}>
+                      <ViewsBadge views={article.views} />
+                    </Meta>
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
                         <Link
                         href={`/publikasi/berita-terbaru/${article.id}`}

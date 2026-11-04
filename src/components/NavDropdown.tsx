@@ -84,7 +84,7 @@ export function NavDropdown({ item, pathname, isOpen, isCurrentSection, onToggle
                 child.href && pathname === child.href ? "page" : undefined
               }
               onClick={onClose}
-              className={`nav-dropdown-item flex min-h-11 items-center px-3 text-navy-deep no-underline hover:bg-mist hover:text-brand ${
+              className={`nav-dropdown-item flex min-h-11 items-center px-3 text-step--1 whitespace-nowrap text-navy-deep no-underline hover:bg-mist hover:text-brand ${
                 child.href && pathname === child.href ? "text-brand" : ""
               }`}
             >

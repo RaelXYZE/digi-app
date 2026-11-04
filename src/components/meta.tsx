@@ -4,10 +4,12 @@ export function Meta({
   date,
   category,
   className = "",
+  children,
 }: {
   date?: string;
   category?: string;
   className?: string;
+  children?: React.ReactNode;
 }) {
   if (!date && !category) return null;
   return (
@@ -20,6 +22,7 @@ export function Meta({
           {formatDate(date)}
         </time>
       )}
+      {children}
     </div>
   );
 }
