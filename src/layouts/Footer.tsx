@@ -12,6 +12,9 @@ const QUICK_LINKS = NAV.map((item) => ({
 const linkClass =
   "inline-flex min-h-11 items-center text-step--1 text-white underline-offset-4 hover:underline";
 
+const quickLinkClass =
+  "inline-flex min-h-9 items-center text-step--1 text-white underline-offset-4 hover:underline md:min-h-0 md:py-1";
+
 const socialIconClass =
   "inline-flex min-h-11 items-center text-white/90 transition-colors hover:text-white";
 
@@ -43,10 +46,10 @@ export default function Footer() {
 
         <nav aria-label="Tautan cepat">
           <h2 className="font-display text-step-0 font-bold">Tautan cepat</h2>
-          <ul className="mt-3">
+          <ul className="mt-3 space-y-0.5 md:space-y-1">
             {QUICK_LINKS.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className={linkClass}>
+                <Link href={l.href} className={quickLinkClass}>
                   {l.label}
                 </Link>
               </li>

@@ -57,8 +57,8 @@ export default function LayananPreview() {
                 onClick={() => setActiveTabId(tab.id)}
                 className={
                   isActive
-                    ? "rounded-full bg-brand px-4 py-2 font-semibold text-white"
-                    : "rounded-full border border-line px-4 py-2 font-semibold text-ink-soft hover:border-brand hover:text-brand"
+                    ? "rounded-md bg-brand px-4 py-2 font-semibold text-white"
+                    : "rounded-md border border-line px-4 py-2 font-semibold text-ink-soft hover:border-brand hover:text-brand"
                 }
               >
                 {tab.label}
