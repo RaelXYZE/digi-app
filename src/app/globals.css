@@ -98,6 +98,14 @@
     line-height: 1.6;
   }
 
+  /* Sticky footer: the LAST direct <section> of <main> fills leftover viewport
+     height so the body canvas (#d5d5d5) never shows between content and the
+     footer. Scoped to direct <section> children so other last children never
+     grow; multi-section pages (e.g. home) stretch only their final section. */
+  main#main-content > section:last-child {
+    flex: 1 0 auto;
+  }
+
   h1, h2, h3 {
     font-family: var(--font-display);
     text-wrap: balance;

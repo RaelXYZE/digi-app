@@ -9,10 +9,10 @@ const QUICK_LINKS = NAV.map((item) => ({
   href: item.href ?? (item.id === "beranda" ? "/" : (item.children?.[0]?.href ?? "/")),
 }));
 
-const linkClass =
-  "inline-flex min-h-11 items-center text-step--1 text-white underline-offset-4 hover:underline";
-
 const quickLinkClass =
+  "inline-flex min-h-9 items-center text-step--1 text-white underline-offset-4 hover:underline md:min-h-0 md:py-1";
+
+const contactLinkClass =
   "inline-flex min-h-9 items-center text-step--1 text-white underline-offset-4 hover:underline md:min-h-0 md:py-1";
 
 const socialIconClass =
@@ -24,10 +24,10 @@ export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-navy text-white bleed bleed-navy">
       <ParticleBackground id="tsparticles-footer" />
-      <div className="wrap wrap-footer relative grid gap-10 py-14 md:grid-cols-[1fr_1fr_1.6fr] lg:grid-cols-[1.3fr_1fr_1fr_1.6fr]">
+      <div className="wrap wrap-footer relative grid gap-8 py-10 md:grid-cols-[1fr_1fr_1.6fr] md:gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.6fr]">
         <div>
           <BrandLockup variant="footer" theme="dark" />
-          <ul className="mt-4 flex gap-4">
+          <ul className="mt-3 flex gap-4">
             {SITE.social.map((s) => (
               <li key={s.id}>
                 <a
@@ -59,7 +59,7 @@ export default function Footer() {
 
         <div>
           <h2 className="font-display text-step-0 font-bold">Jam Pelayanan</h2>
-          <dl className="mt-3 space-y-3">
+          <dl className="mt-3 space-y-2">
             {SERVICE_HOURS.map((h) => (
               <div key={h.day}>
                 <dt className="text-step--1 font-semibold text-white">{h.day}</dt>
@@ -71,7 +71,7 @@ export default function Footer() {
 
         <nav aria-label="Kontak">
           <h2 className="font-display text-step-0 font-bold">Kontak</h2>
-          <address className="mt-3 max-w-reading text-step--1 not-italic text-white/90">
+          <address className="mt-3 max-w-reading space-y-1 text-step--1 not-italic text-white/90 md:space-y-0.5">
             <p>
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
@@ -82,7 +82,7 @@ export default function Footer() {
               </span>
             </p>
             <p>
-              <a href={SITE.phoneHref} className={`${linkClass} gap-2`}>
+              <a href={SITE.phoneHref} className={`${contactLinkClass} gap-2`}>
                 <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
                   <img src="/phone-line-icon.svg" alt="" aria-hidden="true" loading="lazy" width={16} height={16} className="h-full w-full object-contain" />
@@ -91,7 +91,7 @@ export default function Footer() {
               </a>
             </p>
             <p>
-              <a href={`mailto:${SITE.email}`} className={`${linkClass} gap-2`}>
+              <a href={`mailto:${SITE.email}`} className={`${contactLinkClass} gap-2`}>
                 <span className="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element -- decorative footer icon */}
                   <img src="/envelope-line-icon.svg" alt="" aria-hidden="true" loading="lazy" width={16} height={16} className="h-full w-full object-contain" />
@@ -104,7 +104,7 @@ export default function Footer() {
       </div>
 
       <div className="relative border-t border-white/20">
-        <p className="wrap wrap-footer relative text-step--2 pt-5 pb-20 text-white/85">
+        <p className="wrap wrap-footer relative text-step--2 pt-4 pb-16 text-white/85">
           © {year} {SITE.officialName}. Hak cipta dilindungi undang-undang.
         </p>
       </div>

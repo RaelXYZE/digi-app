@@ -67,7 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="id" data-scroll-behavior="smooth">
-        <body>
+        <body className="flex min-h-dvh flex-col">
         <script
           type="application/ld+json"
           nonce={nonce}
@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <AnnouncementBar />
         <Header />
-        <main id="main-content" tabIndex={-1} className="outline-none">
+        <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col outline-none">
           {children}
         </main>
         <Footer />
