@@ -49,7 +49,7 @@ export default async function Berita() {
                   <Placeholder>{"[ISI: Foto berita]"}</Placeholder>
                 </div>
               )}
-              <Meta date={featured.date} category={featured.category}>
+              <Meta date={featured.date} category={featured.category} relative>
                 <ViewsBadge views={featured.views} />
               </Meta>
               {featured.author && (
@@ -74,7 +74,7 @@ export default async function Berita() {
               {rest.map((article) => (
                 <li key={article.id}>
                   <article className="border-b border-line py-5">
-                    <Meta date={article.date} category={article.category}>
+                    <Meta date={article.date} category={article.category} relative>
                       <ViewsBadge views={article.views} />
                     </Meta>
                     <h3 className="mt-2 font-display text-step-1 font-bold leading-snug">
