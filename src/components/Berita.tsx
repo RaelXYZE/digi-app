@@ -20,7 +20,6 @@ export default async function Berita() {
         <h2 id="news-heading" className="text-step-3 font-bold text-navy-deep">
           Berita terbaru
         </h2>
-
         {!featured ? (
           <div className="mt-8 border border-line bg-mist p-6">
             <p className="font-semibold text-navy-deep">

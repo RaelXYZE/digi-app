@@ -15,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/profil/daftar-pegawai",
     "/profil/wilayah-kerja",
     "/publikasi/berita-terbaru",
-    "/publikasi/pengumuman",
     "/publikasi/galeri",
     "/publikasi/laporan-kinerja",
   ].filter((path) => !NOINDEX_ROUTES.includes(path));

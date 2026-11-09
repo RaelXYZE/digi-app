@@ -20,7 +20,7 @@ Next.js 16 (App Router, `src/`), React 19, TypeScript (strict), Tailwind CSS 4. 
 
 ## Data & integrasi
 
-Satu klien fetch terpusat: `src/utils/api.ts` (`getBerita`, `getBeritaItem`, `getPengumuman`, `getLaporanKinerja`, `getPegawai`, `getStatistik`, `getGaleri`, `getHealth`). Dipanggil dari server component (`revalidate: 60`); hasil disaring guard runtime `src/utils/type-guards.ts`. Peta lengkap & status per entity: [`docs/BACKEND_INTEGRATION.md`](./docs/BACKEND_INTEGRATION.md). Halaman uji koneksi: `/status-api`.
+Satu klien fetch terpusat: `src/utils/api.ts` (`getBerita`, `getBeritaItem`, `getLaporanKinerja`, `getPegawai`, `getStatistik`, `getGaleri`, `getHealth`). Dipanggil dari server component (`revalidate: 60`); hasil disaring guard runtime `src/utils/type-guards.ts`. Peta lengkap & status per entity: [`docs/BACKEND_INTEGRATION.md`](./docs/BACKEND_INTEGRATION.md). Halaman uji koneksi: `/status-api`.
 
 ## Masih statis (bukan API)
 

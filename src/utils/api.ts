@@ -37,15 +37,6 @@ export async function getBeritaItem(id: string): Promise<Article | null> {
   return data;
 }
 
-export async function getPengumuman(): Promise<Article[]> {
-  const res = await fetch(`${API_URL}/api/v1/pengumuman/`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error(`Daftar pengumuman gagal: ${res.status}`);
-  const data: unknown = await res.json();
-  return Array.isArray(data) ? data.filter(isArticle) : [];
-}
-
 export async function getLaporanKinerja(): Promise<Article[]> {
   const res = await fetch(`${API_URL}/api/v1/laporan-kinerja/`, {
     next: { revalidate: 60 },

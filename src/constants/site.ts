@@ -48,7 +48,6 @@ export const NAV: readonly NavItem[] = [
     label: "Publikasi",
     children: [
       { id: "berita-terbaru", label: "Berita Terbaru", href: "/publikasi/berita-terbaru" },
-      { id: "pengumuman", label: "Pengumuman", href: "/publikasi/pengumuman" },
       { id: "galeri", label: "Galeri", href: "/publikasi/galeri" },
       { id: "laporan-kinerja", label: "Laporan Kinerja", href: "/publikasi/laporan-kinerja" },
     ],
@@ -67,7 +66,6 @@ export const NOINDEX_ROUTES: readonly string[] = [
   "/profil/daftar-pegawai",
   "/profil/wilayah-kerja",
   "/publikasi/berita-terbaru",
-  "/publikasi/pengumuman",
   "/publikasi/galeri",
   "/publikasi/laporan-kinerja",
 ];
