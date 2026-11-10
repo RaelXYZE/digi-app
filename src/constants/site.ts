@@ -22,13 +22,29 @@ export const SITE = {
 } as const;
 
 export type NavChild = { id: string; label: string; basePath?: string; href?: string };
-export type NavItem = { id: string; label: string; href?: string; children?: readonly NavChild[] };
+export type NavIconName = "home" | "profile" | "services" | "publication";
+export type NavItem = {
+  id: string;
+  label: string;
+  href?: string;
+  /** Mobile menu only; desktop navbar ignores both fields. */
+  description?: string;
+  icon?: NavIconName;
+  children?: readonly NavChild[];
+};
 
 export const NAV: readonly NavItem[] = [
-  { id: "beranda", label: "Beranda" },
+  {
+    id: "beranda",
+    label: "Beranda",
+    description: "Halaman utama",
+    icon: "home",
+  },
   {
     id: "tentang-kami",
     label: "Profil",
+    description: "Profil, pegawai, wilayah kerja",
+    icon: "profile",
     children: [
       { id: "profil-balmon", label: "Profil Balmon Jayapura", href: "/profil" },
       { id: "daftar-pegawai", label: "Daftar Pegawai", href: "/profil/daftar-pegawai" },
@@ -38,6 +54,8 @@ export const NAV: readonly NavItem[] = [
   {
     id: "layanan",
     label: "Layanan",
+    description: "Layanan publik dan perizinan",
+    icon: "services",
     children: [
       { id: "layanan-publik", label: "Layanan Publik", href: "/layanan" },
       { id: "perizinan-online", label: "Perizinan Online", href: "/layanan/perizinan-online" },
@@ -46,6 +64,8 @@ export const NAV: readonly NavItem[] = [
   {
     id: "berita",
     label: "Publikasi",
+    description: "Berita, galeri, laporan kinerja",
+    icon: "publication",
     children: [
       { id: "berita-terbaru", label: "Berita Terbaru", href: "/publikasi/berita-terbaru" },
       { id: "galeri", label: "Galeri", href: "/publikasi/galeri" },

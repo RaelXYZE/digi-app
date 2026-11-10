@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { NAV } from "@/constants/site";
 import { BrandLockup } from "@/components/brand-lockup";
 import { NavDropdown } from "@/components/NavDropdown";
+import { NavIcon } from "@/components/NavIcons";
 import { useActiveSection } from "@/hooks/use-active-section";
 import type { NavItem, NavChild } from "@/constants/site";
 
@@ -252,52 +253,81 @@ export default function Header() {
                 </svg>
               </button>
             </div>
-            <ul className="flex flex-col">
+            <ul className="flex flex-col gap-1 px-3 py-3">
               {NAV.map((item) => {
                 const isActive = isParentActive(item);
                 if (!item.children) {
-                  if (item.href) {
-                    const isRouteActive = pathname.startsWith(item.href);
-                    return (
-                      <li key={item.id} className="border-b border-line">
-                        <Link
-                          href={item.href}
-                          aria-current={isRouteActive ? "page" : undefined}
-                          onClick={() => setOpen(false)}
-                          className="flex min-h-11 items-center px-4 py-5 text-step-2 font-semibold text-navy-deep no-underline"
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    );
-                  }
-                  const href = item.id === "beranda" ? "/" : isHome ? `#${item.id}` : `/#${item.id}`;
+                  const isRouteActive = item.href
+                    ? pathname.startsWith(item.href)
+                    : isActive;
+                  const href = item.href ?? (item.id === "beranda" ? "/" : isHome ? `#${item.id}` : `/#${item.id}`);
                   return (
-                    <li key={item.id} className="border-b border-line">
+                    <li key={item.id}>
                       <Link
                         href={href}
-                        aria-current={isActive ? "location" : undefined}
+                        aria-current={isRouteActive ? "page" : undefined}
                         onClick={() => setOpen(false)}
-                        className="flex min-h-11 items-center px-4 py-5 text-step-2 font-semibold text-navy-deep no-underline"
+                        className={`flex min-h-11 items-center gap-3 rounded-2xl p-3 no-underline motion-safe:transition-colors ${
+                          isRouteActive
+                            ? "bg-mist font-semibold text-brand"
+                            : "font-semibold text-navy-deep hover:bg-paper"
+                        }`}
                       >
-                        {item.label}
+                        {item.icon && (
+                          <span
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
+                              isRouteActive ? "bg-brand text-white" : "bg-mist text-ink-soft"
+                            }`}
+                          >
+                            <NavIcon name={item.icon} className="h-5 w-5" />
+                          </span>
+                        )}
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-step-0 font-semibold">{item.label}</span>
+                          {item.description && (
+                            <span className="block text-step--2 font-normal text-ink-soft">
+                              {item.description}
+                            </span>
+                          )}
+                        </span>
                       </Link>
                     </li>
                   );
                 }
                 const isOpen = expanded === item.id;
                 return (
-                  <li key={item.id} className="border-b border-line">
+                  <li key={item.id}>
                     <button
                       type="button"
                       aria-expanded={isOpen}
+                      aria-controls={item.id}
                       onClick={() => setExpanded(isOpen ? null : item.id)}
-                      className="flex min-h-11 w-full items-center justify-between px-4 py-5 text-step-2 font-semibold text-navy-deep"
+                      className={`flex min-h-11 w-full items-center gap-3 rounded-2xl p-3 text-left motion-safe:transition-colors ${
+                        isActive
+                          ? "bg-mist font-semibold text-brand"
+                          : "font-semibold text-navy-deep hover:bg-paper"
+                      }`}
                     >
-                      {item.label}
+                      {item.icon && (
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
+                            isActive ? "bg-brand text-white" : "bg-mist text-ink-soft"
+                          }`}
+                        >
+                          <NavIcon name={item.icon} className="h-5 w-5" />
+                        </span>
+                      )}
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-step-0 font-semibold">{item.label}</span>
+                        {item.description && (
+                          <span className="block text-step--2 font-normal text-ink-soft">
+                            {item.description}
+                          </span>
+                        )}
+                      </span>
                       <svg
                         viewBox="0 0 24 24"
-                        className={`h-4 w-4 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}
+                        className={`h-4 w-4 shrink-0 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}
                         aria-hidden="true"
                         focusable="false"
                       >
@@ -305,7 +335,7 @@ export default function Header() {
                       </svg>
                     </button>
                     {isOpen && (
-                      <ul className="ml-4 border-l-2 border-line">
+                      <ul id={item.id} className="mt-1 ml-3 flex flex-col gap-1 border-l border-line pl-3">
                         {item.children.map((child) => {
                           const childActive = child.href
                             ? pathname === child.href
@@ -322,8 +352,10 @@ export default function Header() {
                                     : undefined
                                 }
                                 onClick={() => setOpen(false)}
-                                className={`flex min-h-11 items-center px-4 text-step--1 text-navy-deep no-underline ${
-                                  childActive ? "text-brand" : ""
+                                className={`flex min-h-11 items-center rounded-lg px-3 text-step--1 no-underline motion-safe:transition-colors ${
+                                  childActive
+                                    ? "bg-mist font-semibold text-brand"
+                                    : "text-navy-deep hover:bg-paper"
                                 }`}
                               >
                                 {child.label}
